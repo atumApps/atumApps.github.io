@@ -25,7 +25,8 @@ a:hover, a.active { color: #309AFD; }
 .tm-btn {
     padding: 10px 40px;
     color: white;
-    background-color: #3299CD;
+    /* background-color: #3299CD; */
+    background-color: #2c92ff;
     display: inline-block;
     border: none;
     cursor: pointer;
@@ -39,7 +40,8 @@ button.tm-btn {
 
 .tm-btn:hover {
     color: white;
-    background-color: #49b4e9;
+    /* background-color: #49b4e9; */
+    background-color: #7abaff;
 }
 
 h1 { font-size: 3rem; }
