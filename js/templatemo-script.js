@@ -262,23 +262,27 @@ $(document).ready(function () {
       var keijo_img = 'img/';
       var spire_img = 'img/';
       var pixel_img = 'img/';
+      var gridwords_img = 'img/';
       var privacy_img = 'img/';
 
         if(window.innerWidth > 650) {
           keijo_img += 'keijoScreen.jpeg';
           spire_img += 'theSpireScreen.png';
           pixel_img += 'pixelPrincessScreen.png';
+          gridwords_img += 'gridWordsScreen.png';
           privacy_img += 'privacy_large.png';
         } else {
           keijo_img += 'keijoScreen-big.png';
           spire_img += 'theSpireScreen-big.png';
           pixel_img += 'pixelPrincessScreen-big.png';
+          gridwords_img += 'gridWordsScreen-big.png';
           privacy_img += 'privacy_simple.png';
         }
 
         $('.tm-keijo-img').attr('src', keijo_img);
         $('.tm-spire-img').attr('src', spire_img);
         $('.tm-pixel-img').attr('src', pixel_img);
+        $('.tm-gridwords-img').attr('src', gridwords_img);
         $('.tm-privacy-img').attr('src', privacy_img);
     }
 });
