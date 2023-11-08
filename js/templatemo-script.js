@@ -276,7 +276,7 @@ $(document).ready(function () {
           spire_img += 'theSpireScreen-big.png';
           pixel_img += 'pixelPrincessScreen-big.png';
           gridwords_img += 'gridWordsScreen-big.png';
-          privacy_img += 'privacy_simple.png';
+          privacy_img += 'privacy_simpleHighRes.png';
         }
 
         $('.tm-keijo-img').attr('src', keijo_img);

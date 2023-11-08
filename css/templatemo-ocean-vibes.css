@@ -120,8 +120,11 @@ a {
     width: 200px;
     height: 200px;
     padding: 30px;
-    border: 1px solid #D2D3D4;
+    border: 4px solid #D2D3D4;
+    border-radius: 10px;
     color: #999;
+    /* background-color: #fafafa; */
+    background-image: linear-gradient(to bottom right, #e0e0e0 20%, white 30%, #e0e0e0 40%);
     box-sizing: border-box;
 }
 
@@ -260,6 +263,15 @@ button.mfp-arrow {
 .simple_icon {
     max-width: 120px;
     max-height: 120px;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.simple_icon:hover {
+    -webkit-transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .logo {
