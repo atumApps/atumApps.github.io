@@ -17,14 +17,14 @@ https://templatemo.com/tm-554-ocean-vibes
     --popup-overall-background-color: #F1F2F3;
 } */
 :root {
-    --main-color: #000000;
-    --swipe-color: #2b2b2b;
-    --box-color: #000000;
-    --border-color: #ffffff;
-    --icon-font-color: #ffffff;
+    --main-color: #202020;
+    --swipe-color: #c8c8c8;
+    --box-color: #dadada;
+    --border-color: #2c92ff;
+    --icon-font-color: #000000;
     --popup-font-color: #ffffff;
-    --popup-text-background-color: #000000;
-    --popup-overall-background-color: #202020;
+    --popup-text-background-color: #202020;
+    --popup-overall-background-color: #3e3e3e;
 }
 
 html { overflow-x: hidden; }
