@@ -123,10 +123,19 @@ const getUserCoordinates = () => {
             });
         },
         error => { // Show alert if user denied the location permission
-            if (error.code === error.PERMISSION_DENIED) {
-                alert("Geolocation request denied. Please reset location permissions or type a location in the search bar.");
-            } else {
-                alert("Geolocation request error. Please reset location permissions or type a location in the search bar.");
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Sorry, geolocation request denied. Please reset location permissions or type a location in the search bar.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Sorry, geolocation is unavailable. Please type a location in the search bar.");
+                    break;
+                case error.TIMEOUT:
+                    alert("Sorry, geolocation request timed out. Please type a location in the search bar.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Sorry, there was an unknown error with geolocation. Please type a location in the search bar.");
+                    break;
             }
         });
 }

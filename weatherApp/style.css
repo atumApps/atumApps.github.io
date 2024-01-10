@@ -25,7 +25,7 @@ h1 {
   background: var(--blue-color);
   font-size: 1.75rem;
   text-align: center;
-  padding: 18px 150px 18px;
+  padding: 18px 0;
   color: var(--white-color);
 }
 h3 {
@@ -205,7 +205,7 @@ h3 {
 @media (max-width: 750px) {
   h1 {
     font-size: 1.45rem;
-    padding: 16px 0;
+    padding: 16px 20px;
   }
   .container {
     flex-wrap: wrap;
