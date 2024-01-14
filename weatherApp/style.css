@@ -37,6 +37,26 @@ h3 {
   padding: 30px;
 }
 
+/* .figure-container {
+  width: ;
+} */
+
+.myImg {
+  object-fit: contain;
+  max-width: 300px;
+}
+
+.myBox {
+  align-self: auto;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  /* align-items: left;
+  justify-content: left; */
+}
+
 .map {
   width: 100%;
   aspect-ratio: 1;
@@ -49,6 +69,22 @@ h3 {
   transform: scale(1);
   -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out; */
+}
+
+.details {
+  width: 550px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 17px;
+  color: var(--white-color);
+}
+.details .detail {
+  height: 46px;
+  width: 100%;
+  outline: none;
+  font-size: 1.07rem;
+  padding: 17px;
+  margin: 10px 0 20px 0;
 }
 
 .weather-input {

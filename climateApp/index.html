@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- Inspired and modified from CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather</title>
+    <link rel="stylesheet" href="../weatherApp/style.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="../css/templatemo-ocean-vibes.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/j360.js" ></script> -->
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#product').j360();
+        });
+    </script>
+
+    
+  </head>
+  <body>
+    <h1>Matt's Climate App (JavaScript and visualisation demo)</h1>
+    <div class="container">
+      <div class="details">
+        <h3>Plot details:</h3>
+        <div class="detail">
+          Here is some text<br>
+          And some more...
+        </div>
+        <!-- <input class="city-input" type="text" placeholder="E.g., Reading, Exeter, Tokyo...">
+        <button class="search-btn">Search</button>
+        <div class="separator"></div>
+        <button class="location-btn">Use Current Location</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Compass-rose-32-pt.svg", alt="Location map" class="map"> -->
+      </div>
+
+      <div class="figure-container">
+        <div id="product" class="myBox">
+          
+        </div>
+
+      <!-- <div class="figure-container">
+        <div id="product" class="myBox">
+          <img src="images/01.jpg" />
+          <img src="images/02.jpg" />
+          <img src="images/03.jpg" />
+          <img src="images/04.jpg" />
+          <img src="images/05.jpg" />
+          <img src="images/06.jpg" />
+          <img src="images/07.jpg" />
+          <img src="images/08.jpg" />
+          <img src="images/09.jpg" />
+          <img src="images/10.jpg" />
+          <img src="images/11.jpg" />
+          <img src="images/12.jpg" />
+          <img src="images/13.jpg" />
+          <img src="images/14.jpg" />
+          <img src="images/15.jpg" />
+          <img src="images/16.jpg" />
+          <img src="images/17.jpg" />
+          <img src="images/18.jpg" />
+          <img src="images/19.jpg" />
+          <img src="images/20.jpg" />
+          <img src="images/21.jpg" />
+          <img src="images/22.jpg" />
+          <img src="images/23.jpg" />
+          <img src="images/24.jpg" />
+          <img src="images/25.jpg" />
+          <img src="images/26.jpg" />
+          <img src="images/27.jpg" />
+          <img src="images/28.jpg" />
+          <img src="images/29.jpg" />
+          <img src="images/30.jpg" />
+          <img src="images/31.jpg" />
+          <img src="images/32.jpg" />
+          <img src="images/33.jpg" />
+          <img src="images/34.jpg" />
+          <img src="images/35.jpg" />
+          <img src="images/36.jpg" />
+        </div> -->
+        <!-- <div class="current-weather">
+          <div class="details">
+            <h2>Unknown location...</h2>
+            <h6>Temperature: ...</h6>
+            <h6>Wind: ...</h6>
+            <h6>Humidity: ...</h6>
+          </div>
+        </div>
+        <div class="days-forecast">
+          <h2>5-Day Forecast</h2>
+          <ul class="weather-cards">
+            <li class="card">
+              <h3>( ______ )</h3>
+              <h6>Temp: __C</h6>
+              <h6>Wind: __ m/s</h6>
+              <h6>Humidity: __%</h6>
+            </li>
+            <li class="card">
+              <h3>( ______ )</h3>
+              <h6>Temp: __C</h6>
+              <h6>Wind: __ m/s</h6>
+              <h6>Humidity: __%</h6>
+            </li>
+            <li class="card">
+              <h3>( ______ )</h3>
+              <h6>Temp: __C</h6>
+              <h6>Wind: __ m/s</h6>
+              <h6>Humidity: __%</h6>
+            </li>
+            <li class="card">
+              <h3>( ______ )</h3>
+              <h6>Temp: __C</h6>
+              <h6>Wind: __ m/s</h6>
+              <h6>Humidity: __%</h6>
+            </li>
+            <li class="card">
+              <h3>( ______ )</h3>
+              <h6>Temp: __C</h6>
+              <h6>Wind: __ m/s</h6>
+              <h6>Humidity: __%</h6>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+    
+    <footer class="tm-footer">
+      <span>Copyright &copy; 2024 Matthew Menary</span>
+    </footer>
+
+    <script>
+      for (let num = 1; num < 361; num++) {
+        var elem = document.createElement("img");
+        var numStr = "" + num
+        numStr = numStr.padStart(3, "0")
+        // elem.src = 'images/' + numStr + '.jpg';
+        elem.src = 'hg2_maps/SSTdiff_HG2_' + numStr + '_045.jpg';
+        elem.className = "myImg"
+        console.log("DEBUG!", elem.src)
+        document.getElementById("product").appendChild(elem);
+      };
+    </script>
+    <script type="text/javascript" src="js/j360.js" ></script>
+
+  </body>
+</html>
+
+
+
+
+
