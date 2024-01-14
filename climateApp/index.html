@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="script.js" defer></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/j360.js" ></script>
+    <!-- <script type="text/javascript" src="js/j360.js" ></script> -->
 
     <script type="text/javascript">
         jQuery(document).ready(function() {
@@ -26,8 +26,14 @@
       <div class="details">
         <h3>Plot details:</h3>
         <div class="detail">
-          Here is some text<br>
-          And some more...
+          <!-- <ul> -->
+          <li><b>Model:</b> HadGEM3-MM</li>
+          <li><b>Variable:</b> Sea surface temperature (SST, degrees Celcius)</li>
+          <li><b>Scenario:</b> SSP5-8.5</li>
+          <li><b>Time:</b> 2033 minus 2023</li>
+          <li><b>Description:</b> Projected global SST change in the next 10 years as simulated by HadGEM3-MM.</li>
+          <br>Click or touch and drag the map to rotate...
+          <!-- </ul> -->
         </div>
         <!-- <input class="city-input" type="text" placeholder="E.g., Reading, Exeter, Tokyo...">
         <button class="search-btn">Search</button>
@@ -131,7 +137,8 @@
     </footer>
 
     <script>
-      for (let num = 1; num < 361; num++) {
+      for (let i = 1; i < 90; i++) {
+        var num = i * 4
         var elem = document.createElement("img");
         var numStr = "" + num
         numStr = numStr.padStart(3, "0")
