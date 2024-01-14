@@ -100,7 +100,7 @@
                                 }
                                 options.currPosX = pageX;
                                 $obj.html('<img src="' + aImages[options.currImg] + '" class="myImg" />');
-                                console.log("DEBUG", options.currPosX, options.currImg, $obj.html)
+                                // console.log("DEBUG", options.currPosX, options.currImg, $obj.html)
                             }
                         }
                     });
