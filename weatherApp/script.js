@@ -13,9 +13,11 @@ const createWeatherCard = (cityName, weatherItem, index) => {
         console.log(weatherItem)
         return `<div class="details">
                     <h2>${cityName} (${dayOfWeek(weatherItem.dt_txt.split(" ")[0])})</h2>
-                    <h6>Temperature: ${(weatherItem.main.temp - 273.15).toFixed(0) - 0}°C</h6>
+                    <h6>Max temperature: ${(weatherItem.main.temp_max - 273.15).toFixed(0) - 0}°C</h6>
+                    <h6>Min temperature: ${(weatherItem.main.temp_min - 273.15).toFixed(0) - 0}°C</h6>
                     <h6>Wind: ${(weatherItem.wind.speed).toFixed(0)} m/s</h6>
                     <h6>Humidity: ${weatherItem.main.humidity}%</h6>
+                    <h6><em>(Note: Max/min temperatures are 3 hour averages.)</em></h6>
                 </div>
                 <div class="icon">
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
@@ -25,7 +27,8 @@ const createWeatherCard = (cityName, weatherItem, index) => {
         return `<li class="card visible">
                     <h3>${dayOfWeek(weatherItem.dt_txt.split(" ")[0])}</h3>
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
-                    <h6>Temp: ${(weatherItem.main.temp - 273.15).toFixed(0) - 0}°C</h6>
+                    <h6>Max temp: ${(weatherItem.main.temp_max - 273.15).toFixed(0) - 0}°C</h6>
+                    <h6>Min temp: ${(weatherItem.main.temp_min - 273.15).toFixed(0) - 0}°C</h6>
                     <h6>Wind: ${(weatherItem.wind.speed).toFixed(0)} m/s</h6>
                     <h6>Humidity: ${weatherItem.main.humidity}%</h6>
                 </li>`;
@@ -37,19 +40,6 @@ function dayOfWeek(stringDate) {
     return dayAsString
 }
 
-// const getMapImg = (latitude, longitude) => {
-//     const latlon = `${latitude},${longitude}`
-//     const MAP_API_URL = `https://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=10&size=550x550&sensor=false&key=${MAP_API_KEY}&callback=myMap`;
-//     console.log(MAP_API_URL)
-// }
-
-// function myMap(latitude, longitude) {
-//     var mapProp= {
-//       center:new google.maps.LatLng(latitude, longitude),
-//       zoom:5,
-//     };
-//     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-// }
 async function getMapImg(latitude, longitude) {
     const latlon = latitude + "," + longitude
     const MAP_API_URL = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=10&size=550x550&sensor=false&key=" + MAP_API_KEY;
@@ -73,6 +63,31 @@ const getWeatherDetails = (cityName, latitude, longitude) => {
             }
         });
 
+        const uniqueForecastDays2 = [];
+        const tempMins = [];
+        const tempMaxs = [];
+        data.list.forEach(function(forecast) {
+            const forecastDate = new Date(forecast.dt_txt).getDate();
+            const thisTempMin = forecast.main.temp;
+            const thisTempMax = forecast.main.temp;
+            if (!uniqueForecastDays2.includes(forecastDate)) {
+                // First time we've seen this day
+                tempMins.push(thisTempMin)
+                tempMaxs.push(thisTempMax)
+                uniqueForecastDays2.push(forecastDate);
+            } else {
+                const index = uniqueForecastDays2.length - 1;
+                tempMins[index] =  Math.min(tempMins[index],thisTempMin);
+                tempMaxs[index] =  Math.max(tempMaxs[index],thisTempMax);
+            }
+        })
+
+        // Hack! Overwrite temp_min, temp_max and repurpose them as the actual min/max temp (not the error on temp)
+        for (let i = 0; i < fiveDaysForecast.length; i++) {
+            fiveDaysForecast[i].main.temp_min = tempMins[i];
+            fiveDaysForecast[i].main.temp_max = tempMaxs[i];
+        }
+
         // Clearing previous weather data
         cityInput.value = "";
         currentWeatherDiv.innerHTML = "";
@@ -94,6 +109,7 @@ const getWeatherDetails = (cityName, latitude, longitude) => {
 
 const getCityCoordinates = () => {
     const cityName = cityInput.value.trim();
+    console.log("ATTEMPTED city name", cityName);
     if (cityName === "") return;
     const API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
     

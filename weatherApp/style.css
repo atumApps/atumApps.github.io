@@ -83,12 +83,30 @@ h3 {
 
 .details {
   width: 100%;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
   padding: 17px;
   color: var(--white-color);
 }
 .details .detail {
+  /* height: 46px; */
+  height: auto;
+  width: 100%;
+  min-width: 300px;
+  outline: none;
+  font-size: 1.07rem;
+  padding: 17px;
+  margin: 10px 0 20px 0;
+}
+
+.plot-details {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 17px;
+  color: var(--white-color);
+}
+.plot-details .plot-detail {
   /* height: 46px; */
   height: auto;
   width: 100%;
