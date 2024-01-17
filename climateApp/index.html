@@ -29,6 +29,10 @@
       jQuery(document).ready(function() {
         jQuery('#product').j360(clickedOverride=false, imageOffset=0);
 
+        console.log("HERE!!")
+        // document.getElementById("product").style.visibility = "visible"
+        // document.getElementById("loadingScreen").style.visibility = "hidden"
+
         $("button[name='modelToggle']").click(function(){
           modelIndex += 1;
           while (modelIndex >= models.length) {
@@ -90,7 +94,9 @@
         <div id="product" class="myBox">
           
         </div>
-      </div>
+        </div id="loadingScreen" class="myBox">
+          <img src="loader.gif" class="loader" hidden>
+        </div>
     </div>
     
     <footer class="tm-footer">

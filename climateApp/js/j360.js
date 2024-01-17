@@ -27,7 +27,7 @@
                 // 'width': 'auto',
                 'object-fit': 'contain',
                 'text-align' : 'center',
-                'overflow' : 'hidden'
+                'overflow' : 'hidden',
             });
             // $obj.prepend('<img src="/images/loader.gif" class="loader" style="margin-top:' + ($obj.height()/2 - 15) + 'px" />');
 
