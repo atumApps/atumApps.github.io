@@ -63,8 +63,11 @@
                         'filter' : 'alpha(Opacity=0)',
                         'opacity' : 0
                     }, 500);
-                    $obj.html('<img src="' + aImages[1] + '" class="myImg" />');
+                    // console.log("INITIAL IMAGE", imageOffset, aImages[imageOffset + 1], aImages)
+                    // $obj.html('<img src="' + aImages[1] + '" class="myImg" />');
+                    $obj.html('<img src="' + 'foggy.jpg' + '" class="myImg" />');
                     $overlay.bind('mousedown touchstart', function(e) {
+                        // console.log("mousedown!")
                         if (e.type == "touchstart") {
                             options.currPosX = window.event.touches[0].pageX;
                         } else {
@@ -76,8 +79,9 @@
                     jQuery(document).bind('mouseup touchend', function() {
                         options.clicked = false;
                     });
-                    jQuery(document).bind('mousemove touchmove', function(e) {
-                        if (options.clicked) {
+                    jQuery(document).bind('mousemove touchmove refresh', function(e) {
+                        if (options.clicked || clickedOverride) {
+                            // console.log("HERE!")
                             var pageX;
                             if (e.type == "touchmove") {
                                 pageX = window.event.targetTouches[0].pageX;
@@ -86,38 +90,45 @@
                             }
 
                             var width_step = 4;
+                            const maxImages = 90;
                             if (Math.abs(options.currPosX - pageX) >= width_step) {
                                 if (options.currPosX - pageX >= width_step) {
                                     options.currImg++;
-                                    if (options.currImg > imageTotal) {
-                                        options.currImg = 1;
+                                    // console.log("DEBUG 1")
+                                    if (options.currImg >= maxImages) {
+                                        // console.log("DEBUG 2")
+                                        options.currImg = options.currImg - maxImages;
                                     }
                                 } else {
                                     options.currImg--;
-                                    if (options.currImg < 1) {
-                                        options.currImg = imageTotal;
+                                    while (options.currImg < 0) {
+                                        options.currImg += maxImages
                                     }
+                                    // if (options.currImg < 0) {
+                                    //     options.currImg = maxImages - 1;
+                                    // }
                                 }
                                 options.currPosX = pageX;
-                                $obj.html('<img src="' + aImages[options.currImg] + '" class="myImg" />');
-                                // console.log("DEBUG", options.currPosX, options.currImg, $obj.html)
+                                $obj.html('<img src="' + aImages[options.currImg + imageOffset + 1] + '" class="myImg" />');
+                                // console.log("DEBUG MATT", imageOffset, options.currImg, aImages[options.currImg + imageOffset])
+                                // console.log("DEBUG MATTX", aImages[0], aImages[89], aImages[90])
                             }
                         }
                     });
                 }
             });
 
-            if (jQuery.browser.msie || jQuery.browser.mozilla || jQuery.browser.opera || jQuery.browser.safari ) {
-                jQuery(window).resize(function() {
-                    onresizeFunc($obj, $overlay);
-                });
-            } else {
-                var supportsOrientationChange = "onorientationchange" in window,
-                orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-                window.addEventListener(orientationEvent, function() {
-                    onresizeFunc($obj, $overlay);
-                }, false);
-            }
+            // if (jQuery.browser.msie || jQuery.browser.mozilla || jQuery.browser.opera || jQuery.browser.safari ) {
+            //     jQuery(window).resize(function() {
+            //         onresizeFunc($obj, $overlay);
+            //     });
+            // } else {
+            //     var supportsOrientationChange = "onorientationchange" in window,
+            //     orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+            //     window.addEventListener(orientationEvent, function() {
+            //         onresizeFunc($obj, $overlay);
+            //     }, false);
+            // }
             onresizeFunc($obj, $overlay)
 
         });

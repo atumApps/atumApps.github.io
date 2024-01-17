@@ -51,6 +51,16 @@ h3 {
   margin: auto;
 }
 
+.textEmphasis {
+  font-weight: 1000;
+  color: #ff0000;
+}
+
+.button {
+  color: #ff0000;
+  padding: 0px 5px;
+}
+
 .myBox {
   /* display: block; */
   align-self: center;
@@ -242,6 +252,14 @@ h3 {
 }
 .current-weather:hover {
   border: 2px solid var(--blue-color2);
+}
+
+.tm-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  font-size: 0.9em;
+  color: var(--white-color);
 }
 
 @media (max-width: 1400px) {

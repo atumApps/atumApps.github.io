@@ -13,9 +13,58 @@
     <!-- <script type="text/javascript" src="js/j360.js" ></script> -->
 
     <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('#product').j360();
+      const maxImages = 90;
+      const models = ["HadGEM3-GC3.1-MM", "CNRM-CM6.1-HR"];
+      const models_short = ["HG3", "CNRM"];
+      const endYears = ["2033", "2099"];
+      const longTimeText = ["in the next 10 years", "between now and the end of the century"];
+      const hemispheres = ["Northern", "Southern"];
+      const hemispheres_short = ["NH", "SH"];
+
+      // Start values
+      var modelIndex = 0;
+      var timeIndex = 0;
+      var hemiIndex = 0;
+    
+      jQuery(document).ready(function() {
+        jQuery('#product').j360(clickedOverride=false, imageOffset=0);
+
+        $("button[name='modelToggle']").click(function(){
+          modelIndex += 1;
+          while (modelIndex >= models.length) {
+            modelIndex -= models.length;
+          }
+          console.log("modelToggle BUTTON CLICKED", modelIndex);
+          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
+          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+          document.getElementById("modelToggle").innerHTML = models[modelIndex]
+          document.getElementById("modelText").innerHTML = models[modelIndex]
         });
+
+        $("button[name='timeToggle']").click(function(){
+          timeIndex += 1;
+          while (timeIndex >= endYears.length) {
+            timeIndex -= endYears.length;
+          }
+          console.log("timeToggle BUTTON CLICKED", timeIndex);
+          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
+          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+          document.getElementById("timeToggle").innerHTML = endYears[timeIndex]
+          document.getElementById("timeText").innerHTML = longTimeText[timeIndex]
+        });
+
+        $("button[name='hemiToggle']").click(function(){
+          hemiIndex += 1;
+          while (hemiIndex >= hemispheres.length) {
+            hemiIndex -= hemispheres.length;
+          }
+          console.log("hemiToggle BUTTON CLICKED", hemiIndex);
+          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
+          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+          document.getElementById("hemiToggle").innerHTML = hemispheres[hemiIndex]
+          document.getElementById("hemiText").innerHTML = hemispheres[hemiIndex]
+        });
+      });
     </script>
 
     
@@ -26,12 +75,14 @@
       <div class="plot-details">
         <h3>Plot details:</h3>
         <div class="plot-detail">
-          <li><b>Model:</b> HadGEM3-MM</li>
-          <li><b>Variable:</b> Sea surface temperature (SST, degrees Celcius)</li>
-          <li><b>Scenario:</b> SSP5-8.5</li>
-          <li><b>Time:</b> 2033 (annual mean) minus 2023 (annual mean)</li>
-          <li><b>Description:</b> Projected global SST change in the next 10 years as simulated by HadGEM3-MM.</li>
-          <br>Click or touch and drag the map to rotate...
+          <li><b>Model: </b><button type="button" value="HadGEM3-GC3.1-MM" name="modelToggle" id="modelToggle" class="button">HadGEM3-GC3.1-MM</button></li>
+          <li><b>Variable: </b>Sea surface temperature (SST, &degC)</li>
+          <li><b>Scenario: </b>SSP5-8.5</li>
+          <li><b>Time: </b><button type="button" value="2033" name="timeToggle" id="timeToggle" class="button">2033</button> minus 2023 (annual means)</li>
+          <li><b>Focus: </b><button type="button" value="NH" name="hemiToggle" id="hemiToggle" class="button">Northern</button> hemisphere focus</li><br>
+          <li><b>Description: </b>Projected global SST change <span id="timeText">in the next 10 years</span> as simulated by <span id="modelText">HadGEM3-GC3.1-MM</span>, viewed from <span id="hemiText">Northern</span> hemisphere.</li>
+          <br>Select the <span class="textEmphasis">model</span>, <span class="textEmphasis">time</span>, or <span class="textEmphasis">focus</span> to toggle between options.
+          <br><br>Touch and drag the image to reveal...
         </div>
       </div>
 
@@ -39,89 +90,6 @@
         <div id="product" class="myBox">
           
         </div>
-
-      <!-- <div class="figure-container">
-        <div id="product" class="myBox">
-          <img src="images/01.jpg" />
-          <img src="images/02.jpg" />
-          <img src="images/03.jpg" />
-          <img src="images/04.jpg" />
-          <img src="images/05.jpg" />
-          <img src="images/06.jpg" />
-          <img src="images/07.jpg" />
-          <img src="images/08.jpg" />
-          <img src="images/09.jpg" />
-          <img src="images/10.jpg" />
-          <img src="images/11.jpg" />
-          <img src="images/12.jpg" />
-          <img src="images/13.jpg" />
-          <img src="images/14.jpg" />
-          <img src="images/15.jpg" />
-          <img src="images/16.jpg" />
-          <img src="images/17.jpg" />
-          <img src="images/18.jpg" />
-          <img src="images/19.jpg" />
-          <img src="images/20.jpg" />
-          <img src="images/21.jpg" />
-          <img src="images/22.jpg" />
-          <img src="images/23.jpg" />
-          <img src="images/24.jpg" />
-          <img src="images/25.jpg" />
-          <img src="images/26.jpg" />
-          <img src="images/27.jpg" />
-          <img src="images/28.jpg" />
-          <img src="images/29.jpg" />
-          <img src="images/30.jpg" />
-          <img src="images/31.jpg" />
-          <img src="images/32.jpg" />
-          <img src="images/33.jpg" />
-          <img src="images/34.jpg" />
-          <img src="images/35.jpg" />
-          <img src="images/36.jpg" />
-        </div> -->
-        <!-- <div class="current-weather">
-          <div class="details">
-            <h2>Unknown location...</h2>
-            <h6>Temperature: ...</h6>
-            <h6>Wind: ...</h6>
-            <h6>Humidity: ...</h6>
-          </div>
-        </div>
-        <div class="days-forecast">
-          <h2>5-Day Forecast</h2>
-          <ul class="weather-cards">
-            <li class="card">
-              <h3>( ______ )</h3>
-              <h6>Temp: __C</h6>
-              <h6>Wind: __ m/s</h6>
-              <h6>Humidity: __%</h6>
-            </li>
-            <li class="card">
-              <h3>( ______ )</h3>
-              <h6>Temp: __C</h6>
-              <h6>Wind: __ m/s</h6>
-              <h6>Humidity: __%</h6>
-            </li>
-            <li class="card">
-              <h3>( ______ )</h3>
-              <h6>Temp: __C</h6>
-              <h6>Wind: __ m/s</h6>
-              <h6>Humidity: __%</h6>
-            </li>
-            <li class="card">
-              <h3>( ______ )</h3>
-              <h6>Temp: __C</h6>
-              <h6>Wind: __ m/s</h6>
-              <h6>Humidity: __%</h6>
-            </li>
-            <li class="card">
-              <h3>( ______ )</h3>
-              <h6>Temp: __C</h6>
-              <h6>Wind: __ m/s</h6>
-              <h6>Humidity: __%</h6>
-            </li>
-          </ul>
-        </div> -->
       </div>
     </div>
     
@@ -130,18 +98,49 @@
     </footer>
 
     <script>
-      for (let i = 1; i < 90; i++) {
-        var num = i * 4
-        var elem = document.createElement("img");
-        var numStr = "" + num
-        numStr = numStr.padStart(3, "0")
-        // elem.src = 'images/' + numStr + '.jpg';
-        elem.src = 'hg2_maps/SSTdiff_HG2_' + numStr + '_045.jpg';
-        elem.className = "myImg"
-        document.getElementById("product").appendChild(elem);
+      
+      // const endYears = ["2033", "2099"];
+      // const maxImages = 90;
+      // const hemispheres = ["NH", "SH"];
+
+      for (let j = 0; j < models.length; j++) {    // Models
+        const model_short = models_short[j];
+
+        for (let k = 0; k < endYears.length; k++) {  // End years
+          const end_year = endYears[k];
+
+          for (let l = 0; l < hemispheres.length; l++) {     // Hemispheres
+            const hemiStr = hemispheres_short[l];
+
+            for (let i = 0; i < maxImages; i++) {     // Frames
+              const num = i * 4;
+              var numStr = "" + num;
+              numStr = numStr.padStart(3, "0");
+              
+              var elem = document.createElement("img");
+              const filename = 'cmip_frames/SSTdiff_' + model_short + '_' + end_year + '_' + numStr + '_' + hemiStr + '.jpg'
+              console.log(filename)
+              elem.src = filename;
+              elem.className = "myImg";
+              document.getElementById("product").appendChild(elem);
+            };
+          };
+        };
       };
     </script>
+    
     <script type="text/javascript" src="js/j360.js" ></script>
+
+    <!-- <script>
+      function incrementModelToggle() {
+        console.log("incrementModelToggle")
+        modelIndex += 1
+        while (modelIndex >= models.length) {
+          modelIndex -= models.length
+        }
+
+      }
+    </script> -->
 
   </body>
 </html>

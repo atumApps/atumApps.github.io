@@ -42,7 +42,7 @@ function dayOfWeek(stringDate) {
 
 async function getMapImg(latitude, longitude) {
     const latlon = latitude + "," + longitude
-    const MAP_API_URL = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=10&size=550x550&sensor=false&key=" + MAP_API_KEY;
+    const MAP_API_URL = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=11&size=550x550&sensor=false&key=" + MAP_API_KEY;
     const map = document.querySelector(".map")
     console.log(MAP_API_URL)
     map.setAttribute("src", MAP_API_URL)
