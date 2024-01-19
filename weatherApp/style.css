@@ -40,6 +40,7 @@ h3 {
 .figure-container {
   width: 100%;
   height: auto;
+  visibility: hidden;
 }
 
 .myImg {
@@ -98,9 +99,9 @@ h3 {
   margin: auto;
 }
 
-.product {
+/* .product {
   visibility: hidden;
-}
+} */
 
 .loader {
   object-fit: contain;
@@ -112,6 +113,9 @@ h3 {
   align-items: center;
   align-self: center;
   width: auto;
+  right: 200px;
+  bottom: 0;
+  position: relative;
 }
 
 .map {
@@ -341,5 +345,9 @@ h3 {
   }
   .weather-data h2 {
     font-size: 1.35rem;
+  }
+  .loader {
+    left: 0;
+    bottom: 300px;
   }
 }

@@ -39,7 +39,8 @@
       jQuery(document).ready(function() {
         jQuery('#product').j360(imageOffset=0);
 
-        document.getElementById("bob").style.visibility = "hidden";
+        // document.getElementById("loader").style.visibility = "hidden";
+        // document.getElementById("figure-container").style.visibility = "visible";
 
         $("button[name='modelToggle']").click(function(){
           var modelIndex = Number(sessionStorage.getItem("modelIndex"));
@@ -113,20 +114,15 @@
         </div>
       </div>
 
-      <div class="figure-container">
+      <div id="figure-container" class="figure-container">
         <div id="product" class="myBox">
-          <!-- <div id="textBox1" class="textBox">
-            THIS IS MY BOX TEXT 1!
-          </div> -->
         </div>
-        <!-- <div id="textBox2" class="textBox">
-          THIS IS MY BOX TEXT 2!
-        </div> -->
 
-        </div class="myBox">
-          <img src="loader.gif" class="loader" id="bob">
-        </div>
+      </div>
+      <img src="loader.gif" class="loader" id="loader">
     </div>
+      </div>
+
     
     <footer class="tm-footer">
       <span>Copyright &copy; 2024 Matthew Menary</span>

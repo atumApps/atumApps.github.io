@@ -58,6 +58,11 @@
             })
             var imageCount = 0;
             jQuery('.preload_img').load(function() {
+                if (imageCount == 719) {
+                    // console.log("All loaded??")
+                    document.getElementById("loader").style.visibility = "hidden";
+                    document.getElementById("figure-container").style.visibility = "visible";
+                }
                 if (++imageCount == imageTotal) {
                     $overlay.animate({
                         'filter' : 'alpha(Opacity=0)',
@@ -66,6 +71,9 @@
                     // console.log("INITIAL IMAGE", imageOffset, aImages[imageOffset + 1], aImages)
                     $obj.html('<img src="' + aImages[1] + '" class="myImg" />');
                     // $obj.html('<img src="' + 'foggy.jpg' + '" class="myImg" />');
+                    // document.getElementById("loader").style.visibility = "hidden";
+                    // document.getElementById("figure-container").style.visibility = "visible";
+
                     $overlay.bind('mousedown touchstart', function(e) {
                         // console.log("mousedown!")
                         if (e.type == "touchstart") {
