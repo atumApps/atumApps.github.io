@@ -41,6 +41,7 @@ h3 {
   width: 100%;
   height: auto;
   visibility: hidden;
+  max-height: 500px;
 }
 
 .myImg {
@@ -87,7 +88,7 @@ h3 {
   /* display: block; */
   align-self: center;
   width: 100%;
-  max-height: 1500px;
+  max-height: 500px;
   /* aspect-ratio: 1; */
   overflow: hidden;
   /* margin-left: auto;
