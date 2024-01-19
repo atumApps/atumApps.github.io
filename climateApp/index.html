@@ -11,7 +11,7 @@
     <!-- <script src="script.js" defer></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/j360.js" ></script> -->
-
+    
     <script type="text/javascript">
       const maxImages = 90;
       const models = ["HadGEM3-GC3.1-MM", "CNRM-CM6.1-HR"];
@@ -21,52 +21,75 @@
       const hemispheres = ["Northern", "Southern"];
       const hemispheres_short = ["NH", "SH"];
 
+      const nModels = models.length
+      const nEndYears = endYears.length
+      const nHemi = hemispheres.length
+
       // Start values
       var modelIndex = 0;
       var timeIndex = 0;
       var hemiIndex = 0;
+      var clickedOverride = false;
+
+      sessionStorage.setItem("modelIndex", modelIndex);
+      sessionStorage.setItem("timeIndex", timeIndex);
+      sessionStorage.setItem("hemiIndex", hemiIndex);
+      sessionStorage.setItem("clickedOverride", clickedOverride);
     
       jQuery(document).ready(function() {
-        jQuery('#product').j360(clickedOverride=false, imageOffset=0);
+        jQuery('#product').j360(imageOffset=0);
 
-        console.log("HERE!!")
-        // document.getElementById("product").style.visibility = "visible"
-        // document.getElementById("loadingScreen").style.visibility = "hidden"
+        document.getElementById("bob").style.visibility = "hidden";
 
         $("button[name='modelToggle']").click(function(){
+          var modelIndex = Number(sessionStorage.getItem("modelIndex"));
+          
           modelIndex += 1;
-          while (modelIndex >= models.length) {
-            modelIndex -= models.length;
+          while (modelIndex >= nModels) {
+            modelIndex -= nModels;
           }
-          console.log("modelToggle BUTTON CLICKED", modelIndex);
-          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
-          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+          
+          sessionStorage.setItem("modelIndex", modelIndex);
           document.getElementById("modelToggle").innerHTML = models[modelIndex]
           document.getElementById("modelText").innerHTML = models[modelIndex]
+
+          sessionStorage.setItem("clickedOverride", true);
+          event = $.Event('mousemove');
+          $('div[id=product]').trigger(event);
         });
 
         $("button[name='timeToggle']").click(function(){
+          var timeIndex = Number(sessionStorage.getItem("timeIndex"));
+
           timeIndex += 1;
           while (timeIndex >= endYears.length) {
             timeIndex -= endYears.length;
           }
-          console.log("timeToggle BUTTON CLICKED", timeIndex);
-          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
-          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+          
+          sessionStorage.setItem("timeIndex", timeIndex);
           document.getElementById("timeToggle").innerHTML = endYears[timeIndex]
           document.getElementById("timeText").innerHTML = longTimeText[timeIndex]
+
+          sessionStorage.setItem("clickedOverride", true);
+          event = $.Event('mousemove');
+          $('div[id=product]').trigger(event);
         });
 
         $("button[name='hemiToggle']").click(function(){
+          var hemiIndex = Number(sessionStorage.getItem("hemiIndex"));
+
           hemiIndex += 1;
           while (hemiIndex >= hemispheres.length) {
             hemiIndex -= hemispheres.length;
           }
-          console.log("hemiToggle BUTTON CLICKED", hemiIndex);
-          const imageIndex = modelIndex * maxImages * endYears.length * hemispheres.length + timeIndex * maxImages * hemispheres.length + hemiIndex * maxImages;
-          jQuery('#product').j360(clickedOverride=false, imageOffset=imageIndex);
+
+          sessionStorage.setItem("hemiIndex", hemiIndex);
           document.getElementById("hemiToggle").innerHTML = hemispheres[hemiIndex]
           document.getElementById("hemiText").innerHTML = hemispheres[hemiIndex]
+
+          sessionStorage.setItem("clickedOverride", true);
+          event = $.Event('mousemove');
+          $('div[id=product]').trigger(event);
         });
       });
     </script>
@@ -92,10 +115,16 @@
 
       <div class="figure-container">
         <div id="product" class="myBox">
-          
+          <!-- <div id="textBox1" class="textBox">
+            THIS IS MY BOX TEXT 1!
+          </div> -->
         </div>
-        </div id="loadingScreen" class="myBox">
-          <img src="loader.gif" class="loader" hidden>
+        <!-- <div id="textBox2" class="textBox">
+          THIS IS MY BOX TEXT 2!
+        </div> -->
+
+        </div class="myBox">
+          <img src="loader.gif" class="loader" id="bob">
         </div>
     </div>
     
@@ -125,7 +154,7 @@
               
               var elem = document.createElement("img");
               const filename = 'cmip_frames/SSTdiff_' + model_short + '_' + end_year + '_' + numStr + '_' + hemiStr + '.jpg'
-              console.log(filename)
+              // console.log(filename)
               elem.src = filename;
               elem.className = "myImg";
               document.getElementById("product").appendChild(elem);

@@ -64,8 +64,8 @@
                         'opacity' : 0
                     }, 500);
                     // console.log("INITIAL IMAGE", imageOffset, aImages[imageOffset + 1], aImages)
-                    // $obj.html('<img src="' + aImages[1] + '" class="myImg" />');
-                    $obj.html('<img src="' + 'foggy.jpg' + '" class="myImg" />');
+                    $obj.html('<img src="' + aImages[1] + '" class="myImg" />');
+                    // $obj.html('<img src="' + 'foggy.jpg' + '" class="myImg" />');
                     $overlay.bind('mousedown touchstart', function(e) {
                         // console.log("mousedown!")
                         if (e.type == "touchstart") {
@@ -80,8 +80,10 @@
                         options.clicked = false;
                     });
                     jQuery(document).bind('mousemove touchmove refresh', function(e) {
+                        const clickedOverride = (sessionStorage.getItem("clickedOverride") === "true");
+                        // console.log("mousemove ?? triggered", clickedOverride)
                         if (options.clicked || clickedOverride) {
-                            // console.log("HERE!")
+                            // console.log("mousemove clicked triggered")
                             var pageX;
                             if (e.type == "touchmove") {
                                 pageX = window.event.targetTouches[0].pageX;
@@ -89,14 +91,21 @@
                                 pageX = e.pageX;
                             }
 
-                            var width_step = 4;
                             const maxImages = 90;
-                            if (Math.abs(options.currPosX - pageX) >= width_step) {
-                                if (options.currPosX - pageX >= width_step) {
+                            const nEndYears = 2;
+                            const nHemi = 2;
+                            const modelIndex = sessionStorage.getItem("modelIndex");
+                            const timeIndex = sessionStorage.getItem("timeIndex");
+                            const hemiIndex = sessionStorage.getItem("hemiIndex");
+                            const imageOffset = modelIndex * maxImages * nEndYears * hemispheres.length + timeIndex * maxImages * nHemi + hemiIndex * maxImages;
+
+                            var width_step = 4;
+                            if ((Math.abs(options.currPosX - pageX) >= width_step) || clickedOverride) {
+                                if (clickedOverride) {
+                                    // Don't update the image index
+                                } else if (options.currPosX - pageX >= width_step) {
                                     options.currImg++;
-                                    // console.log("DEBUG 1")
                                     if (options.currImg >= maxImages) {
-                                        // console.log("DEBUG 2")
                                         options.currImg = options.currImg - maxImages;
                                     }
                                 } else {
@@ -104,14 +113,12 @@
                                     while (options.currImg < 0) {
                                         options.currImg += maxImages
                                     }
-                                    // if (options.currImg < 0) {
-                                    //     options.currImg = maxImages - 1;
-                                    // }
                                 }
                                 options.currPosX = pageX;
+
+                                sessionStorage.setItem("clickedOverride", false);
+                                document.getElementById("product").style.filter = "";
                                 $obj.html('<img src="' + aImages[options.currImg + imageOffset + 1] + '" class="myImg" />');
-                                // console.log("DEBUG MATT", imageOffset, options.currImg, aImages[options.currImg + imageOffset])
-                                // console.log("DEBUG MATTX", aImages[0], aImages[89], aImages[90])
                             }
                         }
                     });
@@ -119,15 +126,15 @@
             });
 
             // if (jQuery.browser.msie || jQuery.browser.mozilla || jQuery.browser.opera || jQuery.browser.safari ) {
-            //     jQuery(window).resize(function() {
-            //         onresizeFunc($obj, $overlay);
-            //     });
+                jQuery(window).resize(function() {
+                    onresizeFunc($obj, $overlay);
+                });
             // } else {
-            //     var supportsOrientationChange = "onorientationchange" in window,
-            //     orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-            //     window.addEventListener(orientationEvent, function() {
-            //         onresizeFunc($obj, $overlay);
-            //     }, false);
+                var supportsOrientationChange = "onorientationchange" in window,
+                orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+                window.addEventListener(orientationEvent, function() {
+                    onresizeFunc($obj, $overlay);
+                }, false);
             // }
             onresizeFunc($obj, $overlay)
 
