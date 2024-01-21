@@ -77,8 +77,9 @@
                     $overlay.bind('mousedown touchstart', function(e) {
                         // console.log("mousedown!")
                         if (e.type == "touchstart") {
-                            // options.currPosX = window.event.touches[0].pageX;
-                            options.currPosX = e.pageX;
+                            console.log("TEST", window.targetTouches[0].pageX);
+                            options.currPosX = window.event.touches[0].pageX;
+                            // options.currPosX = e.pageX;
                         } else {
                             options.currPosX = e.pageX;
                         }
@@ -95,8 +96,8 @@
                             // console.log("mousemove clicked triggered")
                             var pageX;
                             if (e.type == "touchmove") {
-                                // pageX = window.event.targetTouches[0].pageX;
-                                pageX = e.pageX;
+                                pageX = window.event.targetTouches[0].pageX;
+                                // pageX = e.pageX;
                             } else {
                                 pageX = e.pageX;
                             }
