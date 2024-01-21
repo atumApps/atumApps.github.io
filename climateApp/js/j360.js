@@ -95,7 +95,8 @@
                             // console.log("mousemove clicked triggered")
                             var pageX;
                             if (e.type == "touchmove") {
-                                pageX = window.event.targetTouches[0].pageX;
+                                // pageX = window.event.targetTouches[0].pageX;
+                                pageX = e.pageX;
                             } else {
                                 pageX = e.pageX;
                             }
