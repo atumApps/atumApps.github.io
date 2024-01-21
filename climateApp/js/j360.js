@@ -77,7 +77,8 @@
                     $overlay.bind('mousedown touchstart', function(e) {
                         // console.log("mousedown!")
                         if (e.type == "touchstart") {
-                            options.currPosX = window.event.touches[0].pageX;
+                            // options.currPosX = window.event.touches[0].pageX;
+                            options.currPosX = e.pageX;
                         } else {
                             options.currPosX = e.pageX;
                         }
