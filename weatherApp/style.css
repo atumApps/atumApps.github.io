@@ -20,7 +20,7 @@
 
 body {
   background: var(--background-color);
-  touch-action: none;
+  /* touch-action: none; */
 }
 h1 {
   background: var(--blue-color);
