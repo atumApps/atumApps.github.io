@@ -40,7 +40,8 @@
                 'top' : $obj.offset().top,
                 'left' : $obj.offset().left,
                 'background' : '#fff',
-                'width' : '90%'
+                'width' : '90%',
+                'height' : '100%'
             });
             $obj.after($overlay);
             // $obj.after('<div id="colors_ctrls"></div>');
