@@ -191,6 +191,7 @@ function onresizeFunc($obj, $overlay) {
 
 function preload(image) {
     if (typeof document.body == "undefined") return;
+    
     try {
         var div = document.createElement("div");
         var s = div.style;
@@ -198,7 +199,7 @@ function preload(image) {
         s.top = s.left = 0;
         s.visibility = "hidden";
         document.body.appendChild(div);
-        div.innerHTML = "<img class=\"preload_img\" src=\"" + image + "\" class=\"myImg\" />";
+        div.innerHTML = "<img class=\"preload_img\" src=\"" + image + "\" />";
     } catch(e) {
     // Error. Do nothing.
     }

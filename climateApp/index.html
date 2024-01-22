@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Climate</title>
+    <title>Climate Demo</title>
     <link rel="stylesheet" href="../weatherApp/style.css">
     <!-- <link rel="stylesheet" href="style.css"> -->
     <!-- <link rel="stylesheet" href="../css/templatemo-ocean-vibes.css"> -->
@@ -129,6 +129,16 @@
     </footer>
 
     <script>
+
+      function isMobile() {
+          const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+          return regex.test(navigator.userAgent);
+      }
+      var resStr = "500"
+      if (isMobile()) {
+        resStr = "300"
+        console.log("Using lower res images")
+      }
       
       // const endYears = ["2033", "2099"];
       // const maxImages = 90;
@@ -149,7 +159,7 @@
               numStr = numStr.padStart(3, "0");
               
               var elem = document.createElement("img");
-              const filename = 'cmip_frames/SSTdiff_' + model_short + '_' + end_year + '_' + numStr + '_' + hemiStr + '.jpg'
+              const filename = 'cmip_frames/SSTdiff_' + model_short + '_' + end_year + '_' + numStr + '_' + hemiStr + '_' + resStr + '.jpg'
               // console.log(filename)
               elem.src = filename;
               elem.className = "myImg";

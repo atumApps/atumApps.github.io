@@ -21,6 +21,7 @@
 body {
   background: var(--background-color);
   /* touch-action: none; */
+  /* overflow: hidden; */
 }
 h1 {
   background: var(--blue-color);
@@ -52,6 +53,10 @@ h3 {
   max-width: 500px;
   aspect-ratio: 1;
   margin: auto;
+}
+
+.preloadImg {
+  max-width: 100%;
 }
 
 .textEmphasis {
@@ -351,5 +356,11 @@ h3 {
   .loader {
     left: 0;
     bottom: 300px;
+  }
+}
+
+@media (max-width: 510px) {
+  .myImg {
+    max-width: 100%;
   }
 }
