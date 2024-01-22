@@ -39,17 +39,18 @@
                 'z-index': '5',
                 'top' : $obj.offset().top,
                 'left' : $obj.offset().left,
-                'background' : '#fff'
+                'background' : '#fff',
+                'width' : '90%'
             });
             $obj.after($overlay);
-            $obj.after('<div id="colors_ctrls"></div>');
-            jQuery('#colors_ctrls').css({
-                'width' : $obj.width(),
-                'position' : 'absolute',
-                'z-index': '5',
-                'top' : $obj.offset().top + $obj.height - 50,
-                'left' : $obj.offset().left
-            });
+            // $obj.after('<div id="colors_ctrls"></div>');
+            // jQuery('#colors_ctrls').css({
+            //     'width' : $obj.width(),
+            //     'position' : 'absolute',
+            //     'z-index': '5',
+            //     'top' : $obj.offset().top + $obj.height - 50,
+            //     'left' : $obj.offset().left
+            // });
 
             var imageTotal = 0;
             jQuery('img', $obj).each(function() {
@@ -183,10 +184,10 @@ function onresizeFunc($obj, $overlay) {
         'left' : $obj.offset().left
     });
 
-    jQuery('#colors_ctrls').css({
-        'top' : $obj.offset().top + $obj.height - 50,
-        'left' : $obj.offset().left
-    });
+    // jQuery('#colors_ctrls').css({
+    //     'top' : $obj.offset().top + $obj.height - 50,
+    //     'left' : $obj.offset().left
+    // });
 }
 
 function preload(image) {
@@ -197,6 +198,7 @@ function preload(image) {
         var s = div.style;
         s.position = "absolute";
         s.top = s.left = 0;
+        s.width = "100%"
         s.visibility = "hidden";
         document.body.appendChild(div);
         div.innerHTML = "<img class=\"preload_img\" src=\"" + image + "\" />";
