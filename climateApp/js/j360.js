@@ -41,7 +41,7 @@
                 'left' : $obj.offset().left,
                 'background' : '#fff',
                 'width' : '90%',
-                'height' : '100%'
+                'height' : '500px'
             });
             $obj.after($overlay);
             // $obj.after('<div id="colors_ctrls"></div>');
