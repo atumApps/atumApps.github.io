@@ -75,14 +75,22 @@
                     // document.getElementById("figure-container").style.visibility = "visible";
 
                     $overlay.bind('mousedown touchstart', function(e) {
-                        // console.log("mousedown!")
-                        if (e.type == "touchstart") {
-                            console.log("TEST", window.targetTouches[0].pageX);
-                            options.currPosX = window.event.touches[0].pageX;
-                            // options.currPosX = e.pageX;
-                        } else {
-                            options.currPosX = e.pageX;
+                        // console.log(e.type, "triggered")
+                        // if (e.type == "touchstart") {
+                        //     // options.currPosX = window.event.touches[0].pageX;
+                        //     options.currPosX = e.pageX;
+                        // } else {
+                        //     options.currPosX = e.pageX;
+                        // }
+
+                        if(e.type.includes(`touch`)) {
+                            const { touches, changedTouches } = e.originalEvent ?? e;
+                            const touch = touches[0] ?? changedTouches[0];
+                            options.currPosX = touch.pageX;
+                        } else if (e.type.includes(`mouse`)) {
+                            options.currPosX = e.clientX;
                         }
+
                         options.clicked = true;
                         return false;
                     });
@@ -91,15 +99,26 @@
                     });
                     jQuery(document).bind('mousemove touchmove refresh', function(e) {
                         const clickedOverride = (sessionStorage.getItem("clickedOverride") === "true");
-                        // console.log("mousemove ?? triggered", clickedOverride)
+                        // console.log(e.type, "triggered")
                         if (options.clicked || clickedOverride) {
-                            // console.log("mousemove clicked triggered")
+                            // console.log(e.type, "clicked triggered")
                             var pageX;
-                            if (e.type == "touchmove") {
-                                pageX = window.event.targetTouches[0].pageX;
-                                // pageX = e.pageX;
-                            } else {
-                                pageX = e.pageX;
+                            // if (e.type == "touchmove") {
+                            //     // pageX = window.event.targetTouches[0].pageX;
+                            //     console.log("TEST", pageX, e)
+                            //     pageX = e.pageX;
+                            // } else {
+                            //     pageX = e.pageX;
+                            // }
+
+                            if(e.type.includes(`touch`)) {
+                                const { touches, changedTouches } = e.originalEvent ?? e;
+                                const touch = touches[0] ?? changedTouches[0];
+                                pageX = touch.pageX;
+                                // y = touch.pageY;
+                            } else if (e.type.includes(`mouse`)) {
+                                pageX = e.clientX;
+                                // y = e.clientY;
                             }
 
                             const maxImages = 90;
