@@ -1,0 +1,43 @@
+/* Import Google font - Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+
+:root {
+  --background-color: #000;
+  --main-color: #202020;
+  --main-color2: #343434;
+  --blue-color: #2c92ff;
+  --blue-color2: #1179e9;
+  --white-color: #fff;
+}
+
+
+body {
+  background: var(--background-color);
+}
+
+.letterBox {
+    height: 100px;
+    width: 100px;
+    color: red;
+    position: relative;
+    background-color: var(--blue-color);
+    border-radius: 10px;
+    border: 10px solid var(--white-color);
+    font-size: 80px;
+    line-height: 78px;
+    text-align: center;
+    font-weight: 900;
+}
+
+span {
+    display: inline-block;
+    vertical-align:baseline;
+    /* line-height: normal; */
+  }
