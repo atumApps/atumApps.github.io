@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Neue", sans-serif;
 }
 
 
@@ -23,17 +23,30 @@ body {
 }
 
 .letterBox {
-    height: 100px;
-    width: 100px;
+    height: 10vh;
+    width: 10vh;
     color: red;
-    position: relative;
+    position: absolute;
     background-color: var(--blue-color);
-    border-radius: 10px;
-    border: 10px solid var(--white-color);
-    font-size: 80px;
-    line-height: 78px;
+    border-radius: 1vh;
+    border: 1vh solid var(--white-color);
+    font-size: 8vh;
+    line-height: 8vh;
     text-align: center;
     font-weight: 900;
+}
+
+.position1 {
+    top: 10vh;
+    left: 10vh;
+}
+
+.position2 {
+    left: 10vh;
+}
+
+.position3 {
+    top: 10vh;
 }
 
 span {

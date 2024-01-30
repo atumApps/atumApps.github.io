@@ -3,21 +3,41 @@
     <head>
         <meta charset="utf-8">
         <title>Fun</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            $(document).click(function(){
+                $("#letterA").animate({
+                    left: '+=2vh',
+                    top: '+=5vh',
+                    rotate: '+=10deg'
+                }, 1000);
+                $("#letterB").animate({
+                    left: '+=5vh',
+                    top: '+=5vh',
+                    rotate: '-=10deg'
+                }, 1000);
+                $("#letterC").animate({
+                    top: '+=10vh',
+                    rotate: '+=10deg'
+                }, 1000);
+            }); 
+        </script>
     </head>
 
     <body>
-        <div id="letterA" class="letterBox">
+        <div id="letterA" class="letterBox position1">
             <span>A</span>
         </div>
 
-        <div id="letterB" class="letterBox">
+        <div id="letterB" class="letterBox position2">
             <span>B</span>
         </div>
 
-        <div id="letterC" class="letterBox">
+        <div id="letterC" class="letterBox position3">
             <span>C</span>
         </div>
     </body>
