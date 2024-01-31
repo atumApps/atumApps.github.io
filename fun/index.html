@@ -9,27 +9,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
-            $(document).click(function(){
-                const left = calc(50vw - 5vh);
-                $("#letterG").animate({
-                    left: '+=2vh',
-                    top: '+=5vh',
-                    rotate: '+=10deg'
-                }, 1000);
-                $("#letterR").animate({
-                    left: '+=5vh',
-                    top: '+=5vh',
-                    rotate: '-=10deg'
-                }, 1000);
-                $("#letterI").animate({
-                    top: '+=10vh',
-                    rotate: '+=10deg'
-                }, 1000);
-                $("#letterD").animate({
-                    top: '+=10vh',
-                    rotate: '+=10deg'
-                }, 1000);
-            }); 
+            jQuery(document).ready(function() {
+                var reset = false;
+
+                var height = window.innerHeight;
+                var width = window.innerWidth;
+                var oldLeft1 = $('#letterG').position().left;
+                var oldLeft2 = $('#letterI').position().left;
+                var oldTop1 = $('#letterG').position().top;
+                var oldTop2 = $('#letterR').position().top;
+
+                $(document).click(function(){
+                    reset = !reset;
+
+                    var newLeft1 = oldLeft1 + height * 0.05 * reset;
+                    var newLeft2 = oldLeft2 - height * 0.05 * reset;
+                    var newTop1 = oldTop1 + height * 0.05 * reset;
+                    var newTop2 = oldTop2 + height * 0.05 * reset;
+                    
+                    $("#letterG").animate({
+                        left: newLeft1,
+                        top: newTop1,
+                        // rotate: '+=10deg'
+                    }, 1000);
+                    $("#letterR").animate({
+                        left: newLeft1,
+                        top: newTop2,
+                        // rotate: '-=10deg'
+                    }, 1000);
+                    $("#letterI").animate({
+                        left: newLeft2,
+                        // rotate: '+=10deg'
+                    }, 1000);
+                    $("#letterD").animate({
+                        left: newLeft2,
+                        // rotate: '+=10deg'
+                    }, 1000);
+                }); 
+            });
         </script>
     </head>
 
