@@ -10,17 +10,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
             $(document).click(function(){
-                $("#letterA").animate({
+                const left = calc(50vw - 5vh);
+                $("#letterG").animate({
                     left: '+=2vh',
                     top: '+=5vh',
                     rotate: '+=10deg'
                 }, 1000);
-                $("#letterB").animate({
+                $("#letterR").animate({
                     left: '+=5vh',
                     top: '+=5vh',
                     rotate: '-=10deg'
                 }, 1000);
-                $("#letterC").animate({
+                $("#letterI").animate({
+                    top: '+=10vh',
+                    rotate: '+=10deg'
+                }, 1000);
+                $("#letterD").animate({
                     top: '+=10vh',
                     rotate: '+=10deg'
                 }, 1000);
@@ -29,16 +34,20 @@
     </head>
 
     <body>
-        <div id="letterA" class="letterBox position1">
-            <span>A</span>
+        <div id="letterG" class="letterBox position1">
+            <span>G</span>
         </div>
 
-        <div id="letterB" class="letterBox position2">
-            <span>B</span>
+        <div id="letterR" class="letterBox position2">
+            <span>R</span>
         </div>
 
-        <div id="letterC" class="letterBox position3">
-            <span>C</span>
+        <div id="letterI" class="letterBox position3">
+            <span>I</span>
+        </div>
+
+        <div id="letterD" class="letterBox position4">
+            <span>D</span>
         </div>
     </body>
 </html>

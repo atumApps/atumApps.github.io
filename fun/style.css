@@ -37,16 +37,23 @@ body {
 }
 
 .position1 {
-    top: 10vh;
-    left: 10vh;
+    top: 1vh;
+    left: calc(50vw - 5vh);
 }
 
 .position2 {
-    left: 10vh;
+    top: 11vh;
+    left: calc(50vw - 5vh);
 }
 
 .position3 {
-    top: 10vh;
+    top: 21vh;
+    left: calc(50vw - 5vh);
+}
+
+.position4 {
+    top: 31vh;
+    left: calc(50vw - 5vh);
 }
 
 span {
