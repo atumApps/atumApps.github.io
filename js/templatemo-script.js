@@ -263,6 +263,7 @@ $(document).ready(function () {
       var spire_img = 'img/';
       var pixel_img = 'img/';
       var gridwords_img = 'img/';
+      var poop_img = 'img/';
       var privacy_img = 'img/';
 
         if(window.innerWidth > 650) {
@@ -270,12 +271,14 @@ $(document).ready(function () {
           spire_img += 'theSpireScreen.png';
           pixel_img += 'pixelPrincessScreen.png';
           gridwords_img += 'gridWordsScreen.png';
+          poop_img += 'poopPalScreen.jpeg';
           privacy_img += 'privacy_large.png';
         } else {
           keijo_img += 'keijoScreen-big.png';
           spire_img += 'theSpireScreen-big.png';
           pixel_img += 'pixelPrincessScreen-big.png';
           gridwords_img += 'gridWordsScreen-big.png';
+          poop_img += 'poopPalScreen-big.png';
           privacy_img += 'privacy_simpleHighRes.png';
         }
 
@@ -283,6 +286,7 @@ $(document).ready(function () {
         $('.tm-spire-img').attr('src', spire_img);
         $('.tm-pixel-img').attr('src', pixel_img);
         $('.tm-gridwords-img').attr('src', gridwords_img);
+        $('.tm-poop-img').attr('src', poop_img);
         $('.tm-privacy-img').attr('src', privacy_img);
     }
 });

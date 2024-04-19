@@ -276,6 +276,11 @@ button.mfp-arrow {
     max-height: 600px;
 }
 
+.tm-poop-img {
+    max-width: 300px;
+    max-height: 600px;
+}
+
 .tm-pixel-img {
     max-width: 300px;
     max-height: 600px;
@@ -726,6 +731,11 @@ address {
     }
 
     .tm-gridwords-img {
+        max-width: 100%;
+        max-height: none;
+    }
+
+    .tm-poop-img {
         max-width: 100%;
         max-height: none;
     }
