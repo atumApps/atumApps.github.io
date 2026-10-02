@@ -29,6 +29,9 @@
     --radius-tile: 12px;
     --page-width: 1040px;
     --gutter: 16px;
+    --stage-top: 104px;          /* home page: where open panels may start, just below the logo plate */
+    --dock-columns: 5;           /* phones: tiles per dock row. js/site.js sets this from the tile count */
+    --dock-studio: 2;            /* phones: number of Studio tiles. Also set by js/site.js */
 
     --font-display: "Bricolage Grotesque", "Source Sans 3", sans-serif;
     --font-body: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
@@ -210,7 +213,6 @@ p {
 
 /* ---------- Page column ---------- */
 
-/* The column fills the rest of the window, so the dock rests at the bottom. */
 .page {
     position: relative;
     z-index: 1;
@@ -228,20 +230,17 @@ p {
 
 /* ---------- Dock: the app picker ---------- */
 
-/* Sits at the bottom of the window (never against the edge) and stays there
-   while an open panel scrolls behind it. One row; scrolls sideways if narrow. */
 .dock {
-    position: sticky;
+    position: sticky; /* only matters without JS, when panels scroll past it */
     bottom: var(--gutter);
     z-index: 3;
     display: flex;
-    gap: 28px;
+    flex: none;
+    flex-wrap: wrap;
+    gap: 6px 28px;
     margin-top: 18px;
     padding: 14px 18px 12px;
-    overflow-x: auto;
-    background: rgba(12, 26, 66, 0.82); /* denser than other glass: panels scroll behind it */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+    background: rgba(12, 26, 66, 0.82); /* denser than other glass */
 }
 
 .dock-group {
@@ -334,16 +333,16 @@ p {
     flex: 1;
     flex-direction: column;
     justify-content: flex-end;
+    min-height: 0;
 }
 
+/* .panel is the glass shell; .panel-body inside it holds (and scrolls) the content. */
 .panel {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
-    gap: 36px;
-    align-items: start;
-    padding: 30px;
-    scroll-margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: rgba(12, 26, 66, 0.84); /* dense, so text stays readable over the video */
 }
 
 .panel + .panel {
@@ -357,17 +356,33 @@ p {
 }
 
 .js .panel.is-active {
+    display: flex;
+}
+
+.panel-body {
     display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+    min-height: 0;
+    padding: 30px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none; /* scrolls by wheel or touch, no visible bar */
+}
+
+.panel-body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Landscape artwork sits beside the text in equal halves. */
+.panel--wide .panel-body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 /* Text-only panel (privacy). */
-.panel--text,
-.js .panel--text.is-active {
+.panel--text .panel-body {
     display: block;
-}
-
-.js .panel--text {
-    display: none;
 }
 
 .panel--text p {
@@ -377,6 +392,7 @@ p {
 /* Close button, added to each panel by js/site.js. */
 .panel-close {
     position: absolute;
+    z-index: 1;
     top: 14px;
     right: 14px;
     display: grid;
@@ -412,11 +428,6 @@ p {
     padding-right: 50px; /* room for the close button */
 }
 
-/* Landscape artwork sits beside the text in equal halves. */
-.panel--wide {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-}
-
 .panel h2 {
     font-size: clamp(1.7rem, 3.4vw, 2.3rem);
     letter-spacing: -0.015em;
@@ -431,15 +442,18 @@ p {
     margin-top: 1.6em;
 }
 
+/* Portrait screenshots are sized by height so a panel fits the window without scrolling. */
 .shot {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: clamp(220px, 100dvh - 420px, 541px);
     border-radius: 26px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
 .panel--wide .shot {
+    width: 100%;
+    height: auto;
     border-radius: 14px;
 }
 
@@ -448,7 +462,7 @@ p {
     display: grid;
     place-items: center;
     aspect-ratio: 554 / 1200;
-    padding: 20px;
+    padding: 12px;
     background: var(--tile-fill);
     box-shadow: var(--tile-press);
     color: var(--ink-dim);
@@ -489,6 +503,29 @@ p {
     box-shadow: var(--tile-press);
 }
 
+/* ---------- Home page: a fixed window that never scrolls ----------
+   With JS (and a window tall enough to be usable) the home page is pinned to
+   the window: video at the top, dock at the bottom, and an open panel grows
+   upward from the dock over the video. A panel too tall for the space scrolls
+   inside itself. Without JS the page is an ordinary scrolling document. */
+
+@media (min-height: 520px) {
+    .js .home {
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    .js .home .page {
+        position: fixed;
+        inset: var(--stage-top) 0 0;
+        margin: 0 auto;
+    }
+
+    .js .home .panel {
+        max-height: 100%;
+    }
+}
+
 /* ---------- Long-form pages (privacy policies) ---------- */
 
 .prose {
@@ -514,9 +551,10 @@ p {
 /* ---------- Footer ---------- */
 
 .site-footer {
-    margin-top: 22px;
+    flex: none;
+    margin-top: 14px;
     color: var(--ink-dim);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: center;
 }
 
@@ -527,6 +565,15 @@ p {
 /* ---------- Small screens ---------- */
 
 @media (max-width: 700px) {
+    :root {
+        --stage-top: 92px;
+    }
+
+    /* Twice the height it would otherwise get; the sides crop off-screen. */
+    .hero:not(.hero--plain) {
+        height: min(440px, 60dvh);
+    }
+
     .brand img {
         width: 40px;
     }
@@ -543,39 +590,93 @@ p {
         margin-top: -40px;
     }
 
+    /* The dock becomes one grid: heading, a row of tiles, heading, a row of tiles.
+       Always exactly two tile rows; the tiles shrink to fit rather than scroll. */
     .dock {
-        gap: 18px;
-        padding: 12px 12px 10px;
+        display: grid;
+        grid-template-columns: repeat(var(--dock-columns), minmax(0, 1fr));
+        gap: 6px 4px;
+        margin-top: 12px;
+        padding: 8px 10px 8px;
+    }
+
+    .dock-group,
+    .dock-tiles {
+        display: contents;
+    }
+
+    .dock-label {
+        grid-column: 1 / -1;
+        margin: 0;
+        font-size: 0.72rem;
+    }
+
+    /* "Studio" sits on its own line, starting above the first Studio tile. */
+    .dock-group--studio .dock-label {
+        grid-row: 3;
+        padding-left: calc((100% + 4px) * (var(--dock-columns) - var(--dock-studio)) / var(--dock-columns));
+    }
+
+    .dock-group--studio li:first-child {
+        grid-column-start: calc(var(--dock-columns) - var(--dock-studio) + 1);
     }
 
     .tile {
-        width: 74px;
+        width: auto;
+        gap: 4px;
+        font-size: 0.66rem;
+        line-height: 1.15;
     }
 
     .tile-icon {
-        width: 58px;
-        height: 58px;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
     }
 
     .tile-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .panel-body,
+    .panel--wide .panel-body {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        padding: 18px;
+    }
+
+    /* Portrait screenshots at half size; landscape ones span the panel. */
+    .shot {
+        width: 110px;
+        height: auto;
+        margin-inline: auto;
+        border-radius: 14px;
+    }
+
+    .panel--wide .shot {
+        width: 100%;
+    }
+
+    /* Keep a full-width image clear of the close button. */
+    .js .panel--wide .panel-body {
+        padding-top: 58px;
+    }
+
+    .shot--empty {
+        font-size: 0.75rem;
+    }
+
+    .panel-close {
+        top: 10px;
+        right: 10px;
         width: 38px;
         height: 38px;
     }
 
-    .panel,
-    .panel--wide {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 22px;
-        padding: 20px;
-    }
-
-    .panel .shot {
-        max-width: 220px;
-        margin-inline: auto;
-    }
-
-    .panel--wide .shot {
-        max-width: 100%;
+    .site-footer {
+        margin-top: 10px;
+        font-size: 0.75rem;
     }
 }
 

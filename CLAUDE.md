@@ -43,16 +43,25 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 
 ## How the home page works
 
-- The **stage** holds one `<section class="panel" id="id">` per tile. Panels
-  come first in the HTML and open directly above the dock.
-- The **dock** (`<nav class="dock">`) is last, sticks to the bottom of the
-  window, and holds one `<a class="tile" href="#id">` per panel, grouped under
-  "Apps" and "Studio". It is a single row that scrolls sideways on phones.
+- With JS the home page is a fixed window that **never scrolls**: video at the
+  top, dock at the bottom, and an open panel grows upward from the dock over
+  the video. Do not reintroduce page scrolling or visible scroll bars.
+- The **stage** holds one `<section class="panel" id="id">` per tile. Each
+  panel must contain a single `<div class="panel-body">` wrapping its content;
+  that body scrolls inside the panel (scroll bar hidden) when it is too tall.
+- The **dock** (`<nav class="dock">`) is last in the HTML and holds one
+  `<a class="tile" href="#id">` per panel, grouped under "Apps" and "Studio".
+  On phones it must always be exactly two rows of tiles with no scrolling;
+  `js/site.js` sets `--dock-columns` from the tile count so tiles shrink to fit.
 - `js/site.js` opens the panel matching the tile or URL hash and marks its
   tile with `aria-current="true"`. Clicking the tile again, the panel's X
   (added by the script) or Escape closes it. Nothing is open by default.
-  Without JavaScript all panels are shown stacked, so content must make sense
-  in document order.
+  Without JavaScript all panels are shown stacked in a normal scrolling page.
+- App panels hold only the description and store badge. Bug reports and
+  feature requests go through the "Contact us" button in About us; do not add
+  per-app "Noticed a bug?" lines back.
+- On phones, portrait screenshots show at half size (110px wide) and landscape
+  ones span the panel; the hero video is 440px tall and crops at the sides.
 - The `#privacy` panel repeats the text of `privacy.html` (the stores link to
   that page, so it must stay). Edit both together; the check fails if they
   differ.
@@ -66,7 +75,7 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 2. Add `img/screens/<slug>.webp` — portrait phone screenshot, about 554x1200.
    For a landscape screenshot use the `panel--wide` class on the section.
 3. In `index.html`, copy an existing `<li>` tile in the dock and an existing
-   `<section class="panel">`; change the slug, text, `mailto:` subject and the
+   `<section class="panel">`; change the slug, text and the
    App Store link (keep `&mt=8` on the end of App Store links).
 4. If the app collects any data, update `privacy.html`.
 5. Run `node scripts/check.mjs` and preview at desktop and phone widths.

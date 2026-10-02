@@ -1,6 +1,7 @@
 // atum Apps — site behaviour. No dependencies.
 // 1. The dock: clicking a tile opens that panel above the dock; clicking it
 //    again, the panel's X, or Escape closes it. Nothing is open by default.
+//    The home page never scrolls; a tall panel scrolls inside itself (css/site.css).
 // 2. The hero video's pause/play button.
 // Without JS every panel is simply shown, stacked, and tiles act as anchors.
 
@@ -35,7 +36,6 @@
     function open(id) {
         show(id);
         history.replaceState(null, "", "#" + id);
-        document.getElementById(id).scrollIntoView({ block: "start" });
     }
 
     function close() {
@@ -45,9 +45,6 @@
 
     function showFromHash() {
         show(decodeURIComponent(location.hash.slice(1)));
-        if (openId) {
-            document.getElementById(openId).scrollIntoView({ block: "start" });
-        }
     }
 
     if (panels.length) {
@@ -79,6 +76,13 @@
                 close();
             }
         });
+
+        // Phones lay the dock out in exactly two rows; tell the CSS how many tiles there are.
+        var dock = document.querySelector(".dock");
+        var allTiles = dock.querySelectorAll(".tile").length;
+        var studioTiles = dock.querySelectorAll(".dock-group--studio .tile").length;
+        dock.style.setProperty("--dock-columns", Math.ceil(allTiles / 2));
+        dock.style.setProperty("--dock-studio", studioTiles);
 
         window.addEventListener("hashchange", showFromHash);
         showFromHash();

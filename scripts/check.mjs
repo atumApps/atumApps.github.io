@@ -52,6 +52,11 @@ const tiles = new Set([...home.matchAll(/class="tile" href="#([^"]+)"/g)].map((m
 for (const [, id] of home.matchAll(/<section class="panel[^"]*" id="([^"]+)"/g)) {
     if (!tiles.has(id)) errors.push(`index.html: panel #${id} has no dock tile`);
 }
+// Every panel needs a .panel-body directly inside it (that is the part that scrolls).
+const panelCount = [...home.matchAll(/<section class="panel[^"]*" id=/g)].length;
+const bodyCount = [...home.matchAll(/<section class="panel[^"]*" id="[^"]+">\s*<div class="panel-body">/g)].length;
+if (panelCount !== bodyCount) errors.push("index.html: every panel must start with <div class=\"panel-body\">");
+
 
 // The privacy panel on the home page must say the same as privacy.html.
 const paragraphs = (html) =>
