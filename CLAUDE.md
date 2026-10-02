@@ -18,7 +18,7 @@ within a couple of minutes, so preview locally first.
 ## Layout
 
 ```
-index.html            Home: hero video, dock of app tiles, one panel per app
+index.html            Home: hero video, one panel per app, dock of tiles at the bottom
 privacy.html          Privacy policy for all apps
 inkhornprivacy.html   Privacy policy for Inkhorn
 404.html              Not-found page (uses root-relative URLs only)
@@ -43,14 +43,21 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 
 ## How the home page works
 
-- The **dock** (`<nav class="dock">`) holds one `<a class="tile" href="#id">`
-  per app, grouped under "Apps" and "Studio".
-- The **stage** holds one `<section class="panel" id="id">` per tile.
-- `js/site.js` shows the panel matching the URL hash (or the first panel) and
-  marks its tile with `aria-current="true"`. Without JavaScript all panels are
-  shown stacked, so content must make sense in document order.
+- The **stage** holds one `<section class="panel" id="id">` per tile. Panels
+  come first in the HTML and open directly above the dock.
+- The **dock** (`<nav class="dock">`) is last, sticks to the bottom of the
+  window, and holds one `<a class="tile" href="#id">` per panel, grouped under
+  "Apps" and "Studio". It is a single row that scrolls sideways on phones.
+- `js/site.js` opens the panel matching the tile or URL hash and marks its
+  tile with `aria-current="true"`. Clicking the tile again, the panel's X
+  (added by the script) or Escape closes it. Nothing is open by default.
+  Without JavaScript all panels are shown stacked, so content must make sense
+  in document order.
+- The `#privacy` panel repeats the text of `privacy.html` (the stores link to
+  that page, so it must stay). Edit both together; the check fails if they
+  differ.
 - App ids are kebab-case: `grid-words`, `keijo`, `pixel-princess`,
-  `tiny-evolution`, `the-spire`, `poo-pal`, `inkhorn`, `about`. The same slug
+  `tiny-evolution`, `the-spire`, `poo-pal`, `inkhorn`, `about`, `privacy`. The same slug
   names the icon and screenshot files.
 
 ## Recipe: add an app
@@ -67,8 +74,7 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 ## Unfinished: Inkhorn
 
 The Inkhorn panel is a placeholder. Still needed from the owner: description,
-screenshot, real icon (currently `img/icons/inkhorn.svg`) and the App Store /
-Google Play links (search `index.html` for `TODO`).
+screenshot and the App Store / Google Play links (search `index.html` for `TODO`).
 
 ## Style conventions
 

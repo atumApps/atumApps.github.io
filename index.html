@@ -55,66 +55,7 @@
 
     <main class="page">
 
-        <!-- The dock. One tile per app; href must match a panel id below. -->
-        <nav class="dock glass" aria-label="Apps and studio">
-            <div class="dock-group dock-group--apps">
-                <h2 class="dock-label">Apps</h2>
-                <ul class="dock-tiles">
-                    <li><a class="tile" href="#grid-words">
-                            <span class="tile-icon"><img src="img/icons/grid-words.png" alt="" width="256"
-                                    height="256"></span>
-                            Grid Words
-                        </a></li>
-                    <li><a class="tile" href="#keijo">
-                            <span class="tile-icon"><img src="img/icons/keijo.png" alt="" width="256"
-                                    height="256"></span>
-                            Keijo
-                        </a></li>
-                    <li><a class="tile" href="#pixel-princess">
-                            <span class="tile-icon"><img src="img/icons/pixel-princess.png" alt="" width="256"
-                                    height="256"></span>
-                            Pixel Princess
-                        </a></li>
-                    <li><a class="tile" href="#tiny-evolution">
-                            <span class="tile-icon"><img src="img/icons/tiny-evolution.png" alt="" width="256"
-                                    height="256"></span>
-                            Tiny Evolution
-                        </a></li>
-                    <li><a class="tile" href="#the-spire">
-                            <span class="tile-icon"><img src="img/icons/the-spire.png" alt="" width="256"
-                                    height="256"></span>
-                            The Spire
-                        </a></li>
-                    <li><a class="tile" href="#poo-pal">
-                            <span class="tile-icon"><img src="img/icons/poo-pal.png" alt="" width="256"
-                                    height="256"></span>
-                            Poo Pal
-                        </a></li>
-                    <li><a class="tile" href="#inkhorn">
-                            <span class="tile-icon"><img src="img/icons/inkhorn.svg" alt="" width="256"
-                                    height="256"></span>
-                            Inkhorn
-                        </a></li>
-                </ul>
-            </div>
-            <div class="dock-group dock-group--studio">
-                <h2 class="dock-label">Studio</h2>
-                <ul class="dock-tiles">
-                    <li><a class="tile" href="#about">
-                            <span class="tile-icon"><img src="img/icons/about.png" alt="" width="256"
-                                    height="256"></span>
-                            About us
-                        </a></li>
-                    <li><a class="tile" href="privacy.html">
-                            <span class="tile-icon"><img src="img/icons/privacy.png" alt="" width="256"
-                                    height="256"></span>
-                            Privacy
-                        </a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- The stage. One <section class="panel"> per dock tile. -->
+        <!-- The stage. One <section class="panel"> per dock tile. Panels open above the dock. -->
         <div class="stage">
 
             <section class="panel glass" id="grid-words">
@@ -287,7 +228,7 @@
             </section>
 
             <!-- PLACEHOLDER: Inkhorn. Still to do: real description, screenshot
-                 (img/screens/inkhorn.webp), icon (img/icons/inkhorn.svg) and store links. -->
+                 (img/screens/inkhorn.webp), and store links. -->
             <section class="panel glass" id="inkhorn">
                 <div class="shot shot--empty">Screenshot on its way</div>
                 <div>
@@ -335,7 +276,98 @@
                 </div>
             </section>
 
+            <!-- Same text as privacy.html, which the app stores link to. Keep the two in step
+                 (scripts/check.mjs fails if they differ). -->
+            <section class="panel panel--text glass" id="privacy">
+                <div>
+                    <h2>Privacy Policy</h2>
+                    <p>
+                        In <b>Tiny Evolution</b>, Google Mobile Ads may use the advertising ID of your device to serve
+                        targeted ads. <b>Tiny Evolution</b> uses Google analytics to monitor and improve the app
+                        experience. Further details of how your personal data is handled through Google Analytics can be
+                        found <a rel="nofollow" href="https://policies.google.com/technologies/partner-sites">here</a>. </p>
+                    <p>
+                        <b>Inkhorn</b> sends us anonymous gameplay stats to help balance the game, which can be turned
+                        off in the app's settings, and needs internet access to do so. It is also available on
+                        Android, where optional achievements and the purchase of the app are handled by Google. Full
+                        details are in the <a href="inkhornprivacy.html">Inkhorn privacy policy</a>.
+                    </p>
+                    <p>
+                        <b>All other apps</b> collect no personal data at all and do not transmit any logging data back
+                        to the developers (us).
+                    </p>
+                    <p>
+                        <b>All our apps</b> require no device permissions beyond internet access. In order to access
+                        optional Game Center achievements, users must login with their Game Center account, which is
+                        handled by Apple.
+                    </p>
+                    <p>
+                        In order to purchase optional additional content, users must complete a payment transaction,
+                        which is handled by Apple.
+                    </p>
+                </div>
+            </section>
+
         </div>
+
+        <!-- The dock. One tile per panel; href must match a panel id above. -->
+        <nav class="dock glass" aria-label="Apps and studio">
+            <div class="dock-group dock-group--apps">
+                <h2 class="dock-label">Apps</h2>
+                <ul class="dock-tiles">
+                    <li><a class="tile" href="#grid-words">
+                            <span class="tile-icon"><img src="img/icons/grid-words.png" alt="" width="256"
+                                    height="256"></span>
+                            Grid Words
+                        </a></li>
+                    <li><a class="tile" href="#keijo">
+                            <span class="tile-icon"><img src="img/icons/keijo.png" alt="" width="256"
+                                    height="256"></span>
+                            Keijo
+                        </a></li>
+                    <li><a class="tile" href="#pixel-princess">
+                            <span class="tile-icon"><img src="img/icons/pixel-princess.png" alt="" width="256"
+                                    height="256"></span>
+                            Pixel Princess
+                        </a></li>
+                    <li><a class="tile" href="#tiny-evolution">
+                            <span class="tile-icon"><img src="img/icons/tiny-evolution.png" alt="" width="256"
+                                    height="256"></span>
+                            Tiny Evolution
+                        </a></li>
+                    <li><a class="tile" href="#the-spire">
+                            <span class="tile-icon"><img src="img/icons/the-spire.png" alt="" width="256"
+                                    height="256"></span>
+                            The Spire
+                        </a></li>
+                    <li><a class="tile" href="#poo-pal">
+                            <span class="tile-icon"><img src="img/icons/poo-pal.png" alt="" width="256"
+                                    height="256"></span>
+                            Poo Pal
+                        </a></li>
+                    <li><a class="tile" href="#inkhorn">
+                            <span class="tile-icon"><img src="img/icons/inkhorn.png" alt="" width="256"
+                                    height="256"></span>
+                            Inkhorn
+                        </a></li>
+                </ul>
+            </div>
+            <div class="dock-group dock-group--studio">
+                <h2 class="dock-label">Studio</h2>
+                <ul class="dock-tiles">
+                    <li><a class="tile" href="#about">
+                            <span class="tile-icon"><img src="img/icons/about.png" alt="" width="256"
+                                    height="256"></span>
+                            About us
+                        </a></li>
+                    <li><a class="tile" href="#privacy">
+                            <span class="tile-icon"><img src="img/icons/privacy.png" alt="" width="256"
+                                    height="256"></span>
+                            Privacy
+                        </a></li>
+                </ul>
+            </div>
+        </nav>
 
         <footer class="site-footer">
             Copyright &copy; 2021&ndash;2026 atum Apps - Matthew Menary &nbsp;|&nbsp; <a

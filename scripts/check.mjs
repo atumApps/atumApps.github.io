@@ -53,6 +53,15 @@ for (const [, id] of home.matchAll(/<section class="panel[^"]*" id="([^"]+)"/g))
     if (!tiles.has(id)) errors.push(`index.html: panel #${id} has no dock tile`);
 }
 
+// The privacy panel on the home page must say the same as privacy.html.
+const paragraphs = (html) =>
+    [...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim());
+const panelText = paragraphs(home.slice(home.indexOf('id="privacy"'), home.indexOf("<nav")));
+const pageText = paragraphs(strip(readFileSync(join(root, "privacy.html"), "utf8")));
+if (JSON.stringify(panelText) !== JSON.stringify(pageText)) {
+    errors.push("index.html: the #privacy panel text differs from privacy.html");
+}
+
 // Files GitHub Pages and the app stores rely on.
 for (const file of ["CNAME", "app-ads.txt", "privacy.html", "inkhornprivacy.html", ".nojekyll"]) {
     if (!existsSync(join(root, file))) errors.push(`${file} is missing and must not be deleted`);

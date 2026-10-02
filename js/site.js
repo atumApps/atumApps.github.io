@@ -1,5 +1,6 @@
 // atum Apps — site behaviour. No dependencies.
-// 1. The dock: clicking an app tile shows that app's panel and hides the rest.
+// 1. The dock: clicking a tile opens that panel above the dock; clicking it
+//    again, the panel's X, or Escape closes it. Nothing is open by default.
 // 2. The hero video's pause/play button.
 // Without JS every panel is simply shown, stacked, and tiles act as anchors.
 
@@ -10,29 +11,42 @@
 
     var panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
     var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile[href^="#"]'));
+    var openId = null;
 
+    // Show the panel with this id and hide the rest. A null or unknown id closes everything.
     function show(id) {
-        var found = false;
+        openId = null;
         panels.forEach(function (panel) {
             var active = panel.id === id;
             panel.classList.toggle("is-active", active);
-            found = found || active;
+            if (active) {
+                openId = id;
+            }
         });
         tiles.forEach(function (tile) {
-            if (tile.getAttribute("href") === "#" + id) {
+            if (openId && tile.getAttribute("href") === "#" + openId) {
                 tile.setAttribute("aria-current", "true");
             } else {
                 tile.removeAttribute("aria-current");
             }
         });
-        return found;
+    }
+
+    function open(id) {
+        show(id);
+        history.replaceState(null, "", "#" + id);
+        document.getElementById(id).scrollIntoView({ block: "start" });
+    }
+
+    function close() {
+        show(null);
+        history.replaceState(null, "", location.pathname + location.search);
     }
 
     function showFromHash() {
-        var id = decodeURIComponent(location.hash.slice(1));
-        // Fall back to the first app when the hash is empty or unknown.
-        if (!id || !show(id)) {
-            show(panels[0].id);
+        show(decodeURIComponent(location.hash.slice(1)));
+        if (openId) {
+            document.getElementById(openId).scrollIntoView({ block: "start" });
         }
     }
 
@@ -41,15 +55,29 @@
             tile.addEventListener("click", function (event) {
                 var id = tile.getAttribute("href").slice(1);
                 event.preventDefault();
-                show(id);
-                history.replaceState(null, "", "#" + id);
-
-                // On a phone the panel is below the fold, so bring it into view.
-                var panel = document.getElementById(id);
-                if (panel.getBoundingClientRect().top > window.innerHeight * 0.75) {
-                    panel.scrollIntoView({ block: "start" });
+                if (id === openId) {
+                    close();
+                } else {
+                    open(id);
                 }
             });
+        });
+
+        panels.forEach(function (panel) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "panel-close";
+            button.setAttribute("aria-label", "Close");
+            button.innerHTML =
+                '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15"/></svg>';
+            button.addEventListener("click", close);
+            panel.insertBefore(button, panel.firstChild);
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && openId) {
+                close();
+            }
         });
 
         window.addEventListener("hashchange", showFromHash);

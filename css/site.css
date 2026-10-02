@@ -45,8 +45,11 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     min-height: 100vh;
+    min-height: 100dvh;
     background-color: var(--night);
     background-image:
         radial-gradient(60vw 50vw at 8% 30%, rgba(48, 154, 253, 0.22), transparent 70%),
@@ -107,7 +110,8 @@ p {
 
 .hero {
     position: relative;
-    height: clamp(220px, 34vw, 380px);
+    flex: none;
+    height: clamp(220px, 42vw, 480px);
     overflow: hidden;
 }
 
@@ -116,6 +120,7 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top; /* any cropping comes off the bottom, which fades out anyway */
     -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent);
     mask-image: linear-gradient(to bottom, #000 50%, transparent);
 }
@@ -205,12 +210,16 @@ p {
 
 /* ---------- Page column ---------- */
 
+/* The column fills the rest of the window, so the dock rests at the bottom. */
 .page {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     width: min(var(--page-width), 100% - 2 * var(--gutter));
     margin: -64px auto 0;
-    padding-bottom: 40px;
+    padding-bottom: var(--gutter);
 }
 
 .hero--plain + .page {
@@ -219,24 +228,28 @@ p {
 
 /* ---------- Dock: the app picker ---------- */
 
+/* Sits at the bottom of the window (never against the edge) and stays there
+   while an open panel scrolls behind it. One row; scrolls sideways if narrow. */
 .dock {
+    position: sticky;
+    bottom: var(--gutter);
+    z-index: 3;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px 28px;
-    padding: 14px 18px 16px;
+    gap: 28px;
+    margin-top: 18px;
+    padding: 14px 18px 12px;
+    overflow-x: auto;
+    background: rgba(12, 26, 66, 0.82); /* denser than other glass: panels scroll behind it */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
 }
 
 .dock-group {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: none;
 }
 
 .dock-group--apps {
-    flex-grow: 7;
-}
-
-.dock-group--studio {
-    flex: 0 0 190px;
+    flex: 1 0 auto;
 }
 
 /* Group label with a rule running off to the right. */
@@ -259,9 +272,8 @@ p {
 }
 
 .dock-tiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
-    gap: 10px 6px;
+    display: flex;
+    gap: 6px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -269,6 +281,7 @@ p {
 
 .tile {
     display: flex;
+    width: 92px;
     flex-direction: column;
     align-items: center;
     gap: 7px;
@@ -315,11 +328,16 @@ p {
 
 /* ---------- Stage: one panel per app ---------- */
 
+/* Panels open directly above the dock. */
 .stage {
-    margin-top: 18px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .panel {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
     gap: 36px;
@@ -342,7 +360,59 @@ p {
     display: grid;
 }
 
-/* Landscape artwork goes above the text instead of beside it. */
+/* Text-only panel (privacy). */
+.panel--text,
+.js .panel--text.is-active {
+    display: block;
+}
+
+.js .panel--text {
+    display: none;
+}
+
+.panel--text p {
+    max-width: 72ch;
+}
+
+/* Close button, added to each panel by js/site.js. */
+.panel-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-tile);
+    background: var(--tile-fill);
+    box-shadow: var(--tile-raise);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.panel-close:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.panel-close:active {
+    box-shadow: var(--tile-press);
+}
+
+.panel-close svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
+
+.js .panel h2 {
+    padding-right: 50px; /* room for the close button */
+}
+
+/* Landscape artwork sits beside the text in equal halves. */
 .panel--wide {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
@@ -444,7 +514,7 @@ p {
 /* ---------- Footer ---------- */
 
 .site-footer {
-    margin-top: 28px;
+    margin-top: 22px;
     color: var(--ink-dim);
     font-size: 0.9rem;
     text-align: center;
@@ -474,17 +544,12 @@ p {
     }
 
     .dock {
-        gap: 14px;
-        padding: 12px 12px 14px;
+        gap: 18px;
+        padding: 12px 12px 10px;
     }
 
-    .dock-group--apps,
-    .dock-group--studio {
-        flex: 1 1 100%;
-    }
-
-    .dock-tiles {
-        grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    .tile {
+        width: 74px;
     }
 
     .tile-icon {
