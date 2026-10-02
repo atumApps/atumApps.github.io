@@ -1,0 +1,525 @@
+/* atum Apps — site styles.
+   One stylesheet for every page. Design tokens first; change colours and
+   spacing there rather than in the rules below. See CLAUDE.md. */
+
+:root {
+    /* Palette */
+    --night: #070d1f;            /* page background */
+    --blue: #309afd;             /* brand primary (matches the lotus + icons) */
+    --blue-soft: #8cc4ff;        /* links and accents on dark */
+    --teal: #35b9ad;             /* second glow, taken from the hero video */
+    --ink: #f4f7ff;              /* main text */
+    --ink-dim: #b4c0dc;          /* secondary text */
+
+    /* Glass sheet */
+    --glass-fill: rgba(44, 78, 160, 0.26);
+    --glass-edge: rgba(255, 255, 255, 0.55);
+    --glass-glow: inset 0 4px 20px rgba(255, 255, 255, 0.16);
+    --glass-drop: 0 8px 32px rgba(4, 12, 60, 0.45);
+    --glass-blur: blur(14px) saturate(1.7);
+
+    /* Raised tile (the neumorphic part) */
+    --tile-fill: rgba(255, 255, 255, 0.09);
+    --tile-raise: inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.35), 0 4px 10px rgba(0, 0, 0, 0.35);
+    --tile-press: inset 0 2px 6px rgba(0, 0, 0, 0.5),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+
+    --radius-sheet: 16px;
+    --radius-tile: 12px;
+    --page-width: 1040px;
+    --gutter: 16px;
+
+    --font-display: "Bricolage Grotesque", "Source Sans 3", sans-serif;
+    --font-body: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--night);
+    background-image:
+        radial-gradient(60vw 50vw at 8% 30%, rgba(48, 154, 253, 0.22), transparent 70%),
+        radial-gradient(55vw 45vw at 95% 85%, rgba(53, 185, 173, 0.16), transparent 70%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: var(--blue-soft);
+    text-underline-offset: 0.18em;
+}
+
+a:hover {
+    color: #fff;
+}
+
+:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+h1,
+h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+}
+
+p {
+    margin: 0 0 1em;
+    max-width: 62ch;
+}
+
+/* ---------- Glass ---------- */
+
+.glass {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-edge);
+    border-radius: var(--radius-sheet);
+    box-shadow: var(--glass-drop), var(--glass-glow);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+}
+
+/* ---------- Hero (video banner) ---------- */
+
+.hero {
+    position: relative;
+    height: clamp(220px, 34vw, 380px);
+    overflow: hidden;
+}
+
+/* The video fades out at the bottom so the dock appears to sit on it. */
+.hero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent);
+    mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+.hero--plain {
+    height: 150px;
+}
+
+.brand {
+    position: absolute;
+    z-index: 2;
+    top: var(--gutter);
+    left: max(var(--gutter), calc((100vw - var(--page-width)) / 2));
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 18px 10px 12px;
+}
+
+/* Darker glass for anything sitting directly on the video, so it stays legible. */
+.brand,
+.video-toggle {
+    background: rgba(7, 13, 31, 0.6);
+}
+
+.brand img {
+    width: 54px;
+    height: auto;
+}
+
+.wordmark {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.wordmark a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wordmark-atum {
+    color: var(--blue);
+}
+
+.tagline {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+}
+
+.video-toggle {
+    position: absolute;
+    z-index: 2;
+    top: var(--gutter);
+    right: max(var(--gutter), calc((100vw - var(--page-width)) / 2));
+    display: none; /* shown by js/site.js, which is what makes it work */
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.js .video-toggle {
+    display: grid;
+}
+
+.video-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.video-toggle .icon-play,
+.video-toggle[aria-pressed="true"] .icon-pause {
+    display: none;
+}
+
+.video-toggle[aria-pressed="true"] .icon-play {
+    display: block;
+}
+
+/* ---------- Page column ---------- */
+
+.page {
+    position: relative;
+    z-index: 1;
+    width: min(var(--page-width), 100% - 2 * var(--gutter));
+    margin: -64px auto 0;
+    padding-bottom: 40px;
+}
+
+.hero--plain + .page {
+    margin-top: -24px;
+}
+
+/* ---------- Dock: the app picker ---------- */
+
+.dock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    padding: 14px 18px 16px;
+}
+
+.dock-group {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.dock-group--apps {
+    flex-grow: 7;
+}
+
+.dock-group--studio {
+    flex: 0 0 190px;
+}
+
+/* Group label with a rule running off to the right. */
+.dock-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-dim);
+}
+
+.dock-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.dock-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 10px 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    color: var(--ink);
+    font-size: 0.82rem;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+}
+
+.tile-icon {
+    display: grid;
+    place-items: center;
+    width: 66px;
+    height: 66px;
+    border-radius: var(--radius-tile);
+    background: var(--tile-fill);
+    box-shadow: var(--tile-raise);
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.tile-icon img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.tile:hover .tile-icon {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.tile:active .tile-icon {
+    box-shadow: var(--tile-press);
+    transform: translateY(1px);
+}
+
+/* The selected app: pressed in, with a white ring. */
+.tile[aria-current="true"] .tile-icon {
+    background: rgba(48, 154, 253, 0.28);
+    box-shadow: var(--tile-press), 0 0 0 2px #fff;
+    transform: none;
+}
+
+/* ---------- Stage: one panel per app ---------- */
+
+.stage {
+    margin-top: 18px;
+}
+
+.panel {
+    display: grid;
+    grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+    padding: 30px;
+    scroll-margin-top: 16px;
+}
+
+.panel + .panel {
+    margin-top: 18px;
+}
+
+/* With JS, only the selected panel is shown. Without it they all stack. */
+.js .panel {
+    display: none;
+    margin-top: 0;
+}
+
+.js .panel.is-active {
+    display: grid;
+}
+
+/* Landscape artwork goes above the text instead of beside it. */
+.panel--wide {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.panel h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    letter-spacing: -0.015em;
+    margin-bottom: 0.6em;
+}
+
+.panel-kind {
+    color: var(--ink-dim);
+}
+
+.panel-ps {
+    margin-top: 1.6em;
+}
+
+.shot {
+    width: 100%;
+    height: auto;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.panel--wide .shot {
+    border-radius: 14px;
+}
+
+/* Stand-in for an app that has no screenshot yet. */
+.shot--empty {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 554 / 1200;
+    padding: 20px;
+    background: var(--tile-fill);
+    box-shadow: var(--tile-press);
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 1.6em;
+}
+
+.badge img {
+    width: 180px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: var(--radius-tile);
+    background: var(--tile-fill);
+    box-shadow: var(--tile-raise);
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.button:active {
+    box-shadow: var(--tile-press);
+}
+
+/* ---------- Long-form pages (privacy policies) ---------- */
+
+.prose {
+    max-width: 800px;
+    padding: 34px clamp(20px, 5vw, 56px) 38px;
+}
+
+.prose h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    letter-spacing: -0.015em;
+    margin-bottom: 0.7em;
+}
+
+.prose p {
+    max-width: 68ch;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.4em;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    margin-top: 28px;
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.site-footer a {
+    color: inherit;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 700px) {
+    .brand img {
+        width: 40px;
+    }
+
+    .wordmark {
+        font-size: 1.35rem;
+    }
+
+    .tagline {
+        font-size: 0.8rem;
+    }
+
+    .page {
+        margin-top: -40px;
+    }
+
+    .dock {
+        gap: 14px;
+        padding: 12px 12px 14px;
+    }
+
+    .dock-group--apps,
+    .dock-group--studio {
+        flex: 1 1 100%;
+    }
+
+    .dock-tiles {
+        grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    }
+
+    .tile-icon {
+        width: 58px;
+        height: 58px;
+    }
+
+    .tile-icon img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .panel,
+    .panel--wide {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        padding: 20px;
+    }
+
+    .panel .shot {
+        max-width: 220px;
+        margin-inline: auto;
+    }
+
+    .panel--wide .shot {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .tile-icon {
+        transition: none;
+    }
+}

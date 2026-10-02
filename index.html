@@ -4,489 +4,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>atumApps</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <!-- https://fonts.google.com/ -->
-    <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/templatemo-ocean-vibes.css">
+    <title>atum Apps — indie games by indie gamers</title>
+    <meta name="description"
+        content="atum Apps is an indie app studio in Exeter, UK, making puzzle games for iOS: Grid Words, Keijo, Pixel Princess, Tiny Evolution, The Spire and more.">
+    <link rel="canonical" href="https://www.atumapps.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="atum Apps — indie games by indie gamers">
+    <meta property="og:description" content="Puzzle games and apps for iOS from a small studio in Exeter, UK.">
+    <meta property="og:url" content="https://www.atumapps.com/">
+    <meta property="og:image" content="https://www.atumapps.com/video/hero-poster.jpg">
+    <meta name="theme-color" content="#070d1f">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <!--
-
-TemplateMo 554 Ocean Vibes
-
-https://templatemo.com/tm-554-ocean-vibes
-
--->
 </head>
 
 <body>
-    <header class="tm-site-header">
+    <header class="hero">
+        <video autoplay muted loop playsinline poster="video/hero-poster.jpg">
+            <source src="video/hero.mp4" type="video/mp4">
+        </video>
 
-        <h1 class="tm-mt-0 tm-mb-15"> <img src="img/lotus_cropped.png" alt="atum apps logo" class="logo"> <span
-                class="tm-color-primary">atum</span> <span class="tm-color-gray-2">Apps</span></h1>
-        <em class="tm-tagline tm-color-light-gray">indie games by indie gamers</em>
+        <div class="brand glass">
+            <img src="img/lotus.png" alt="" width="700" height="530">
+            <div>
+                <h1 class="wordmark"><a href="/"><span class="wordmark-atum">atum</span> Apps</a></h1>
+                <p class="tagline">indie games by indie gamers</p>
+            </div>
+        </div>
+
+        <button class="video-toggle glass" type="button" aria-pressed="false" aria-label="Pause video">
+            <svg class="icon-pause" viewBox="0 0 20 20" aria-hidden="true">
+                <rect x="4" y="3" width="4.5" height="14" rx="1" />
+                <rect x="11.5" y="3" width="4.5" height="14" rx="1" />
+            </svg>
+            <svg class="icon-play" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M6 3.5v13a1 1 0 0 0 1.5.85l10.5-6.5a1 1 0 0 0 0-1.7L7.5 2.65A1 1 0 0 0 6 3.5z" />
+            </svg>
+        </button>
     </header>
 
-    <!-- Video banner 400 px height -->
-    <div id="tm-video-container" class="this_is_video">
-        <video autoplay muted loop id="tm-video" poster="video/poster.jpg">
-            <source src="video/appVideoFinal.mp4" type="video/mp4">
-        </video>
-        <i id="tm-video-control-button" class="fas fa-pause"></i>
-    </div>
-    <div class="tm-container">
-        <nav class="tm-main-nav">
-            <ul id="inline-popups">
-                <li class="tm-nav-item">
-                    <a href="#gridWords" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Grid Words
-                        <img src="img/icons_simple/gridWords_simple.png" alt="Grid Words app" class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#keijo" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Keijo
-                        <img src="img/icons_simple/keijo_simple.png" alt="Keijo app" class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#pixelPrincess" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Pixel Princess
-                        <img src="img/icons_simple/pixelPrincess_simple.png" alt="Pixel princess app"
-                            class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#tinyEvolution" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Tiny Evolution
-                        <img src="img/icons_simple/tinyEvolution_simple.png" alt="Tiny evolution app"
-                            class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#theSpire" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        The Spire
-                        <img src="img/icons_simple/theSpire_simple.png" alt="The Spire app" class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#poopPal" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Poo Pal
-                        <img src="img/icons_simple/poopPal_simple.png" alt="Poo Pal app" class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#about" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        About us
-                        <img src="img/icons_simple/aboutUs_simple.png" alt="About us" class="simple_icon">
-                    </a>
-                </li>
-                <li class="tm-nav-item">
-                    <a href="#privacy" data-effect="mfp-move-from-top" class="tm-nav-link">
-                        Privacy
-                        <img src="img/icons_simple/privacy_simple.png" alt="Privacy" class="simple_icon">
-                    </a>
-                </li>
-            </ul>
-            <!-- <h2 id="privacy_policy" class="tm-color-primary tm-page-title">Privacy</h2>
-            <div class="tm-col-6 tm-intro-col-l">
-                <p>
-                    In <b>Tiny Evolution</b>, Google Mobile Ads may use the advertising ID of your device to serve targeted ads. <b>Tiny Evolution</b> uses Google analytics to monitor and improve the app experience. Further details of how your personal data is handled through Google Analytics can be found <a rel="nofollow" href="https://policies.google.com/technologies/partner-sites" style="color: #309AFD" target="_parent">here</a>. </p>
-                <p>
-                    <b>All other apps</b> collect no personal data at all and do not transmit any logging data back to the developers (us). </p>
-                <p>
-                    <b>All our apps</b> require no device permissions. In order to access optional Game Center achievements, users must login with their Game Center account, which is handled by Apple. </p>
-                <p>
-                    In order to purchase optional additional content, users must complete a payment transaction, which is handled by Apple.
-                </p>
-            </div> -->
+    <main class="page">
+
+        <!-- The dock. One tile per app; href must match a panel id below. -->
+        <nav class="dock glass" aria-label="Apps and studio">
+            <div class="dock-group dock-group--apps">
+                <h2 class="dock-label">Apps</h2>
+                <ul class="dock-tiles">
+                    <li><a class="tile" href="#grid-words">
+                            <span class="tile-icon"><img src="img/icons/grid-words.png" alt="" width="256"
+                                    height="256"></span>
+                            Grid Words
+                        </a></li>
+                    <li><a class="tile" href="#keijo">
+                            <span class="tile-icon"><img src="img/icons/keijo.png" alt="" width="256"
+                                    height="256"></span>
+                            Keijo
+                        </a></li>
+                    <li><a class="tile" href="#pixel-princess">
+                            <span class="tile-icon"><img src="img/icons/pixel-princess.png" alt="" width="256"
+                                    height="256"></span>
+                            Pixel Princess
+                        </a></li>
+                    <li><a class="tile" href="#tiny-evolution">
+                            <span class="tile-icon"><img src="img/icons/tiny-evolution.png" alt="" width="256"
+                                    height="256"></span>
+                            Tiny Evolution
+                        </a></li>
+                    <li><a class="tile" href="#the-spire">
+                            <span class="tile-icon"><img src="img/icons/the-spire.png" alt="" width="256"
+                                    height="256"></span>
+                            The Spire
+                        </a></li>
+                    <li><a class="tile" href="#poo-pal">
+                            <span class="tile-icon"><img src="img/icons/poo-pal.png" alt="" width="256"
+                                    height="256"></span>
+                            Poo Pal
+                        </a></li>
+                    <li><a class="tile" href="#inkhorn">
+                            <span class="tile-icon"><img src="img/icons/inkhorn.svg" alt="" width="256"
+                                    height="256"></span>
+                            Inkhorn
+                        </a></li>
+                </ul>
+            </div>
+            <div class="dock-group dock-group--studio">
+                <h2 class="dock-label">Studio</h2>
+                <ul class="dock-tiles">
+                    <li><a class="tile" href="#about">
+                            <span class="tile-icon"><img src="img/icons/about.png" alt="" width="256"
+                                    height="256"></span>
+                            About us
+                        </a></li>
+                    <li><a class="tile" href="privacy.html">
+                            <span class="tile-icon"><img src="img/icons/privacy.png" alt="" width="256"
+                                    height="256"></span>
+                            Privacy
+                        </a></li>
+                </ul>
+            </div>
         </nav>
 
-        <!-- Popup itself -->
-        <div id="gridWords" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/gridWordsScreen.png" alt="Grid Words app example screen" class="tm-gridwords-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">Grid Words: Logical Letters</h2>
-                    <div class="tm-row tm-content-row">
-                        <div class="tm-col-6 tm-intro-col-l">
-                            <p>
-                                Grid Words: Logical Letters is a tricky, word-based puzzle game. Like a crossword, but
-                                better </p>
-                            <p>
-                                Move the tiles to complete the grid. With easy-to-learn gameplay and a sleek design,
-                                Grid Words is here for all you word fiends that can't quite scratch that word puzzle
-                                itch. Now with almost 200 unique puzzles every month! </p>
-                            <p>
-                                It's time to make some words!
-                            </p>
-                        </div>
-                        <div class="tm-col-6">
-                            <p>
-                                Grid Words: Logical Letters is an iOS game from indie game developers <i>atum Apps</i>.
-                            </p>
-                            <!-- <p>
-                                AND HERE.
-                            </p> -->
-                            <p class="tm-mb-80">
-                                Noticed a bug, or have a feature request? <a
-                                    href="mailto:contact@atumapps.com?subject=Grid%20Words%20iOS%20app"
-                                    style="color: #309AFD">Email us!</a> <br>
-                            </p>
-                            <div class="tm-text-center">
-                                <a href="https://itunes.apple.com/us/app/grid-words-logical-letters/id6448230752?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                                    style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&h=6292597223a90aef48faa8dff1557359"
-                                        alt="Download on the App Store"
-                                        style="border-radius: 13px; width: 250px; height: 83px;"></a>
-                            </div>
-                            <!-- <div class="tm-text-center">
-                                <a href='https://play.google.com/store/apps/details?id=com.bbc.sounds&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="display: inline-block; overflow: hidden; width: 280px;"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- The stage. One <section class="panel"> per dock tile. -->
+        <div class="stage">
 
-        <div id="keijo" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/keijoScreen.jpeg" alt="Keijo app example screen" class="tm-keijo-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">Keijo</h2>
-                    <div class="tm-row tm-content-row">
-                        <div class="tm-col-6 tm-intro-col-l">
-                            <p>
-                                KEIJŌ is a relaxing, shape moving, color-theory, puzzle game. </p>
-                            <p>
-                                Move the shapes to match the amount of visible colours. Earn stars to unlock even more
-                                exciting shapes and new game modes. Or play INFINITE mode and go at your own pace. </p>
-                            <p>
-                                Can you beat your high score?
-                            </p>
-                        </div>
-                        <div class="tm-col-6">
-                            <p>
-                                KEIJŌ is an iOS game from indie game developers <i>atum Apps</i>.
-                            </p>
-                            <!-- <p>
-                                AND HERE.
-                            </p> -->
-                            <p class="tm-mb-80">
-                                Noticed a bug, or have a feature request? <a
-                                    href="mailto:contact@atumapps.com?subject=Keijō%20iOS%20app"
-                                    style="color: #309AFD">Email us!</a> <br>
-                            </p>
-                            <div class="tm-text-center">
-                                <a href="https://itunes.apple.com/us/app/keijo/id1562504743?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                                    style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&h=6292597223a90aef48faa8dff1557359"
-                                        alt="Download on the App Store"
-                                        style="border-radius: 13px; width: 250px; height: 83px;"></a>
-                            </div>
-                            <!-- <div class="tm-text-center">
-                                <a href='https://play.google.com/store/apps/details?id=com.bbc.sounds&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="display: inline-block; overflow: hidden; width: 280px;"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="theSpire" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/theSpireScreen.png" alt="The Spire app example screen" class="tm-spire-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">The Spire</h2>
-                    <div class="tm-row tm-content-row">
-                        <div class="tm-col-6 tm-intro-col-l">
-                            <p>
-                                The Spire is an indie puzzle game where all you need to do is draw a line up the spire.
-                                It's almost certainly as easy as that, right? </p>
-                            <p>
-                                With plenty of different puzzle types, some requiring unique solutions, some requiring
-                                out-of-the-box thinking, but all needing your brain. </p>
-                            <p>
-                                Can <b>YOU</b> make it to the top of the Spire? <br>
-                            </p>
-                        </div>
-                        <div class="tm-col-6">
-                            <p>
-                                The Spire is an iOS game from indie game developers <i>atum Apps</i>.
-                            </p>
-                            <!-- <p>
-                                AND HERE.
-                            </p> -->
-                            <p class="tm-mb-80">
-                                Noticed a bug, or have a feature request? <a
-                                    href="mailto:contact@atumapps.com?subject=The%20Spire%20iOS%20app"
-                                    style="color: #309AFD">Email us!</a> <br>
-                            </p>
-                            <div class="tm-text-center">
-                                <a href="https://itunes.apple.com/us/app/the-spire/id1632894901?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                                    style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&h=6292597223a90aef48faa8dff1557359"
-                                        alt="Download on the App Store"
-                                        style="border-radius: 13px; width: 250px; height: 83px;"></a>
-                            </div>
-                            <!-- <div class="tm-text-center">
-                                <a href='https://play.google.com/store/apps/details?id=com.bbc.sounds&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="display: inline-block; overflow: hidden; width: 280px;"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="poopPal" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/poopPalScreen.jpeg" alt="Poo Pal app example screen" class="tm-poop-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">Poo Pal: Loo Trip Tracker</h2>
-                    <div class="tm-row tm-content-row">
-                        <div class="tm-col-6 tm-intro-col-l">
-                            <p>
-                                Poo Pal is your friendly assistant to quickly and simply track your bowel motions/loo
-                                trips/regularity.
-                            </p>
-                            <p>
-                                Whatever you call it, this app keeps a simple log of it, which you can use to check see
-                                how your symptoms are changing through time or because you just like recording data!
-                            </p>
-                            <p>
-                                You can view your data by time of day and see it aggregated daily, weekly, or monthly.
-                                You can also see how details associated with each trip are changing through time.
-                            </p>
-                        </div>
-                        <div class="tm-col-6">
-                            <p>
-                                Poo Pal: Loo Trip Tracker is an iOS app from indie developers <i>atum Apps</i>.
-                            </p>
-                            <p class="tm-mb-80">
-                                Noticed a bug, or have a feature request? <a
-                                    href="mailto:contact@atumapps.com?subject=Poop%20Pal%20iOS%20app"
-                                    style="color: #309AFD">Email us!</a> <br>
-                            </p>
-                            <div class="tm-text-center">
-                                <a href="https://itunes.apple.com/us/app/bowel-buddy/id6478829393?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                                    style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&h=6292597223a90aef48faa8dff1557359"
-                                        alt="Download on the App Store"
-                                        style="border-radius: 13px; width: 250px; height: 83px;"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="pixelPrincess" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/pixelPrincessScreen.png" alt="Pixel princess app example screen" class="tm-pixel-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">Pixel Princess</h2>
-                    <div class="tm-row tm-content-row">
-                        <div class="tm-col-6 tm-intro-col-l">
-                            <p> Pixel Princess is a classic retro puzzle game - easy to learn and hard to master. </p>
-                            <p>
-                                The Princess Pixel has lost her dragon and - even worse - he's split into multiple
-                                copies! It's up to you to find and unite them, as quickly as possible.
-                            <p>
-                                Are you up to the challenge?
-                            </p>
-                        </div>
-                        <div class="tm-col-6">
-                            <p>
-                                Pixel Princess is an iOS game from indie game developers <i>atum Apps</i>.
-                            </p>
-                            <!-- <p>
-                              AND HERE.
-                          </p> -->
-                            <p class="tm-mb-80">
-                                Noticed a bug, or have a feature request? <a
-                                    href="mailto:contact@atumapps.com?subject=Pixel%20Princess%20iOS%20app"
-                                    style="color: #309AFD">Email us!</a> <br>
-                            </p>
-                            <div class="tm-text-center">
-                                <!-- When updating don't forget to add this &mt=8 -->
-                                <a href="https://itunes.apple.com/us/app/pixel-princess/id1586993593?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                                    style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1643155200&h=7ace65eb084e2f688f78193c2da423f9"
-                                        alt="Download on the App Store"
-                                        style="border-radius: 13px; width: 250px; height: 83px;"></a>
-                            </div>
-                            <!-- <div class="tm-text-center">
-                              <a href='https://play.google.com/store/apps/details?id=com.bbc.sounds&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="display: inline-block; overflow: hidden; width: 280px;"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-                          </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tinyEvolution" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <h2 class="tm-color-primary tm-about-col tm-mb-40 tm-page-title">Tiny Evolution</h2>
-            <div class="tm-row tm-about-row">
-                <div class="tm-col tm-about-col tm-about-left">
-                    <img src="img/tinyEvolutionScreen.png" alt="Tiny evolution app example screen" class="tm-mb-30">
-                    <p class="tm-mb-40">
-                        <!-- In Tiny Evolution you start life as an amoeba, floating around in the endless void. But you could be so much more! -->
+            <section class="panel glass" id="grid-words">
+                <img class="shot" src="img/screens/grid-words.webp" alt="Grid Words app example screen" width="554"
+                    height="1200">
+                <div>
+                    <h2>Grid Words: Logical Letters</h2>
+                    <p>
+                        Grid Words: Logical Letters is a tricky, word-based puzzle game. Like a crossword, but better.
                     </p>
+                    <p>
+                        Move the tiles to complete the grid. With easy-to-learn gameplay and a sleek design, Grid
+                        Words is here for all you word fiends that can't quite scratch that word puzzle itch. Now
+                        with almost 200 unique puzzles every month!
+                    </p>
+                    <p>It's time to make some words!</p>
+                    <p class="panel-kind">
+                        Grid Words: Logical Letters is an iOS game from indie game developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Grid%20Words%20iOS%20app">Email us!</a>
+                    </p>
+                    <div class="panel-actions">
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/grid-words-logical-letters/id6448230752?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&amp;h=6292597223a90aef48faa8dff1557359"
+                                alt="Download Grid Words on the App Store" width="180" height="60"></a>
+                    </div>
                 </div>
-                <div class="tm-col tm-about-col">
-                    <p class="tm-mb-40">
+            </section>
+
+            <section class="panel glass" id="keijo">
+                <img class="shot" src="img/screens/keijo.webp" alt="Keijo app example screen" width="554"
+                    height="1200" loading="lazy">
+                <div>
+                    <h2>Keijo</h2>
+                    <p>KEIJŌ is a relaxing, shape moving, color-theory, puzzle game.</p>
+                    <p>
+                        Move the shapes to match the amount of visible colours. Earn stars to unlock even more
+                        exciting shapes and new game modes. Or play INFINITE mode and go at your own pace.
+                    </p>
+                    <p>Can you beat your high score?</p>
+                    <p class="panel-kind">
+                        KEIJŌ is an iOS game from indie game developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Keijō%20iOS%20app">Email us!</a>
+                    </p>
+                    <div class="panel-actions">
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/keijo/id1562504743?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&amp;h=6292597223a90aef48faa8dff1557359"
+                                alt="Download Keijo on the App Store" width="180" height="60" loading="lazy"></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel glass" id="pixel-princess">
+                <img class="shot" src="img/screens/pixel-princess.webp" alt="Pixel Princess app example screen"
+                    width="554" height="1200" loading="lazy">
+                <div>
+                    <h2>Pixel Princess</h2>
+                    <p>Pixel Princess is a classic retro puzzle game - easy to learn and hard to master.</p>
+                    <p>
+                        The Princess Pixel has lost her dragon and - even worse - he's split into multiple copies!
+                        It's up to you to find and unite them, as quickly as possible.
+                    </p>
+                    <p>Are you up to the challenge?</p>
+                    <p class="panel-kind">
+                        Pixel Princess is an iOS game from indie game developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Pixel%20Princess%20iOS%20app">Email us!</a>
+                    </p>
+                    <div class="panel-actions">
+                        <!-- When updating don't forget to add this &mt=8 -->
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/pixel-princess/id1586993593?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1643155200&amp;h=7ace65eb084e2f688f78193c2da423f9"
+                                alt="Download Pixel Princess on the App Store" width="180" height="60"
+                                loading="lazy"></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel--wide glass" id="tiny-evolution">
+                <img class="shot" src="img/screens/tiny-evolution.webp" alt="Tiny Evolution app example screen"
+                    width="1200" height="900" loading="lazy">
+                <div>
+                    <h2>Tiny Evolution</h2>
+                    <p>
                         In Tiny Evolution you start life as an amoeba, floating around in the endless void. But you
                         could be so much more!
                     </p>
-                    <p class="tm-mb-40">
+                    <p>
                         Connect the different systems together and try and evolve up the
                         <i>not-scientifically-rigorous!</i> complexity chain.
                     </p>
-                    <p class="tm-mb-40">
-                        Can you go all the way?
+                    <p>Can you go all the way?</p>
+                    <p class="panel-kind">
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Tiny%20Evolution%20iOS%20app">Email us!</a>
                     </p>
-                    <p class="tm-mb-40">
-                        Noticed a bug, or have a feature request? <a
-                            href="mailto:contact@atumapps.com?subject=Tiny%20Evolution%20iOS%20app"
-                            style="color: #309AFD">Email us!</a> <br>
-                    </p>
-                    <div class="tm-text-center">
+                    <div class="panel-actions">
                         <!-- When updating don't forget to add this &mt=8 -->
-                        <a href="https://itunes.apple.com/us/app/tiny-evolution/id1611356819?itsct=apps_box_badge&amp;itscg=30200&mt=8"
-                            style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img
-                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&h=6292597223a90aef48faa8dff1557359"
-                                alt="Download on the App Store"
-                                style="border-radius: 13px; width: 250px; height: 83px;"></a>
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/tiny-evolution/id1611356819?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&amp;h=6292597223a90aef48faa8dff1557359"
+                                alt="Download Tiny Evolution on the App Store" width="180" height="60"
+                                loading="lazy"></a>
                     </div>
-                    <!-- <div class="tm-text-center">
-                    <a href='https://play.google.com/store/apps/details?id=com.bbc.sounds&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' style="display: inline-block; overflow: hidden; width: 280px;"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-                </div> -->
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div id="about" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <h2 class="tm-color-primary tm-about-col tm-mb-40 tm-page-title">About us</h2>
-            <div class="tm-row tm-about-row">
-                <div class="tm-col tm-about-col tm-about-left">
-                    <img src="img/about_large.png" alt="Image" class="tm-mb-30">
-                    <p class="tm-mb-40">
-                        <i>atum Apps</i> is an indie app (mostly games) development studio based in Exeter, UK. We are a
-                        small team, dedicated to creating new and engaging app experiences.
+            <section class="panel glass" id="the-spire">
+                <img class="shot" src="img/screens/the-spire.webp" alt="The Spire app example screen" width="554"
+                    height="1200" loading="lazy">
+                <div>
+                    <h2>The Spire</h2>
+                    <p>
+                        The Spire is an indie puzzle game where all you need to do is draw a line up the spire. It's
+                        almost certainly as easy as that, right?
                     </p>
-                    <p class="tm-mb-40">
+                    <p>
+                        With plenty of different puzzle types, some requiring unique solutions, some requiring
+                        out-of-the-box thinking, but all needing your brain.
+                    </p>
+                    <p>Can <b>YOU</b> make it to the top of the Spire?</p>
+                    <p class="panel-kind">
+                        The Spire is an iOS game from indie game developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=The%20Spire%20iOS%20app">Email us!</a>
+                    </p>
+                    <div class="panel-actions">
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/the-spire/id1632894901?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&amp;h=6292597223a90aef48faa8dff1557359"
+                                alt="Download The Spire on the App Store" width="180" height="60"
+                                loading="lazy"></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel glass" id="poo-pal">
+                <img class="shot" src="img/screens/poo-pal.webp" alt="Poo Pal app example screen" width="554"
+                    height="1200" loading="lazy">
+                <div>
+                    <h2>Poo Pal: Loo Trip Tracker</h2>
+                    <p>
+                        Poo Pal is your friendly assistant to quickly and simply track your bowel motions/loo
+                        trips/regularity.
+                    </p>
+                    <p>
+                        Whatever you call it, this app keeps a simple log of it, which you can use to check see how
+                        your symptoms are changing through time or because you just like recording data!
+                    </p>
+                    <p>
+                        You can view your data by time of day and see it aggregated daily, weekly, or monthly. You
+                        can also see how details associated with each trip are changing through time.
+                    </p>
+                    <p class="panel-kind">
+                        Poo Pal: Loo Trip Tracker is an iOS app from indie developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Poop%20Pal%20iOS%20app">Email us!</a>
+                    </p>
+                    <div class="panel-actions">
+                        <a class="badge"
+                            href="https://itunes.apple.com/us/app/bowel-buddy/id6478829393?itsct=apps_box_badge&amp;itscg=30200&amp;mt=8"><img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1631836800&amp;h=6292597223a90aef48faa8dff1557359"
+                                alt="Download Poo Pal on the App Store" width="180" height="60" loading="lazy"></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PLACEHOLDER: Inkhorn. Still to do: real description, screenshot
+                 (img/screens/inkhorn.webp), icon (img/icons/inkhorn.svg) and store links. -->
+            <section class="panel glass" id="inkhorn">
+                <div class="shot shot--empty">Screenshot on its way</div>
+                <div>
+                    <h2>Inkhorn</h2>
+                    <p>Inkhorn is a word game for iOS and Android. More details coming soon.</p>
+                    <p class="panel-kind">
+                        Inkhorn is a game from indie game developers <i>atum Apps</i>.
+                        Noticed a bug, or have a feature request?
+                        <a href="mailto:contact@atumapps.com?subject=Inkhorn%20app">Email us!</a>
+                        You can also read the <a href="inkhornprivacy.html">Inkhorn privacy policy</a>.
+                    </p>
+                    <div class="panel-actions">
+                        <!-- TODO: replace both hrefs with the real store links. -->
+                        <a class="button" href="#inkhorn">App Store</a>
+                        <a class="button" href="#inkhorn">Google Play</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel--wide glass" id="about">
+                <img class="shot" src="img/screens/about.webp" alt="" width="1400" height="700" loading="lazy">
+                <div>
+                    <h2>About us</h2>
+                    <p>
+                        <i>atum Apps</i> is an indie app (mostly games) development studio based in Exeter, UK. We
+                        are a small team, dedicated to creating new and engaging app experiences.
+                    </p>
+                    <p>
                         Like all the best things, <i>atum Apps</i> was formed in a third floor apartment in Paris,
                         France in January 2021. We moved to our current home in Exeter in summer 2022.
                     </p>
-                </div>
-                <div class="tm-col tm-about-col">
-                    <p class="tm-mb-40">
-                        All of our apps aim to provide a clean, polished, and unique experience. If you like our work,
-                        don't hesitate to leave a review and some stars - they go a long way!
+                    <p>
+                        All of our apps aim to provide a clean, polished, and unique experience. If you like our
+                        work, don't hesitate to leave a review and some stars - they go a long way!
                     </p>
-                    <p class="tm-mb-40">
-                        Our apps are written natively in Swift for iOS. If you'd like to see Android versions, let us
-                        know.
+                    <p>
+                        Our apps are written natively in Swift for iOS. If you'd like to see Android versions, let
+                        us know.
                     </p>
-                    <p class="tm-mb-40">
-                        For any/all enquiries, please get in touch. </p>
-                    <a href="mailto:contact@atumapps.com?subject=General%20Enquiry"
-                        class="tm-btn tm-btn-primary mfp-prevent-close tm-btn-contact tm-mb-40">
-                        Contact Us
-                    </a>
-                    <p class="tm-mb-40">
-                        <em>P.S. Please do not feed the chain chomp!</em>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div id="privacy" class="popup mfp-with-anim mfp-hide tm-bg-gray">
-            <a href="#" class="tm-close-popup">
-                return home
-                <i class="fas fa-times"></i>
-            </a>
-            <div class="tm-row tm-intro-row">
-                <img src="img/privacy_large.png" alt="Privacy icon" class="tm-privacy-img">
-                <div class="tm-col tm-bg-white tm-intro-pad">
-                    <h2 class="tm-color-primary tm-page-title">Privacy Policy</h2>
-                    <div class="tm-row tm-content-row">
-                        <div>
-                            <p>
-                                In <b>Tiny Evolution</b>, Google Mobile Ads may use the advertising ID of your device to
-                                serve targeted ads. <b>Tiny Evolution</b> uses Google analytics to monitor and improve
-                                the app experience. Further details of how your personal data is handled through Google
-                                Analytics can be found <a rel="nofollow"
-                                    href="https://policies.google.com/technologies/partner-sites" style="color: #309AFD"
-                                    target="_parent">here</a>. </p>
-                            <p>
-                                <b>Inkhorn</b> sends us anonymous gameplay stats to help balance the game, which can be
-                                turned off in the app's settings, and needs internet access to do so. It is also
-                                available on Android, where optional achievements and the purchase of the app are
-                                handled by Google. Full details are in the <a href="/inkhornprivacy"
-                                    style="color: #309AFD">Inkhorn privacy policy</a>.
-                            </p>
-                            <p>
-                                <b>All other apps</b> collect no personal data at all and do not transmit any logging
-                                data back to the developers (us).
-                            </p>
-                            <p>
-                                <b>All our apps</b> require no device permissions beyond internet access. In order to
-                                access optional Game Center achievements, users must login with their Game Center
-                                account, which is handled by Apple.
-                            </p>
-                            <p class="tm-mb-0">
-                                In order to purchase optional additional content, users must complete a payment
-                                transaction, which is handled by Apple.
-                            </p>
-                        </div>
+                    <p>For any/all enquiries, please get in touch.</p>
+                    <div class="panel-actions">
+                        <a class="button" href="mailto:contact@atumapps.com?subject=General%20Enquiry">Contact us</a>
                     </div>
+                    <p class="panel-kind panel-ps"><em>P.S. Please do not feed the chain chomp!</em></p>
                 </div>
-            </div>
+            </section>
+
         </div>
 
-        <footer class="tm-footer">
-            <span>Copyright &copy; 2022 atum Apps - Matthew Menary</span>
+        <footer class="site-footer">
+            Copyright &copy; 2021&ndash;2026 atum Apps - Matthew Menary &nbsp;|&nbsp; <a
+                href="privacy.html">Privacy</a>
         </footer>
+    </main>
 
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/imagesloaded.pkgd.min.js"></script>
-        <script src="js/isotope.pkgd.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/templatemo-script.js"></script>
+    <script src="js/site.js"></script>
 </body>
 
 </html>

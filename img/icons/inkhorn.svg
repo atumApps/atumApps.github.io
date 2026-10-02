@@ -1,0 +1,7 @@
+<!-- PLACEHOLDER icon for Inkhorn. Replace with the real app icon (see CLAUDE.md). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Inkhorn">
+  <path fill="#309afd" d="M76 108h104a12 12 0 0 1 12 12v8c14 12 22 30 22 50 0 30-22 50-50 50H92c-28 0-50-20-50-50 0-20 8-38 22-50v-8a12 12 0 0 1 12-12z"/>
+  <rect fill="#7abaff" x="88" y="84" width="80" height="24" rx="8"/>
+  <path fill="#7abaff" d="M150 84 206 20c6 22-2 46-30 64z"/>
+  <ellipse fill="#bfdcff" cx="128" cy="176" rx="46" ry="26"/>
+</svg>
