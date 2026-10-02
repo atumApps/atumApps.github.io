@@ -2,7 +2,9 @@
 // 1. The dock: clicking a tile opens that panel above the dock; clicking it
 //    again, the panel's X, or Escape closes it. Nothing is open by default.
 //    The home page never scrolls; a tall panel scrolls inside itself (css/site.css).
-// 2. The hero video's pause/play button.
+//    Left/right arrow keys and sideways swipes step through the panels.
+// 2. A soft highlight on the glass that follows the mouse pointer.
+// 3. The hero video's pause/play button.
 // Without JS every panel is simply shown, stacked, and tiles act as anchors.
 
 (function () {
@@ -12,20 +14,14 @@
 
     var panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
     var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile[href^="#"]'));
+    // Panel ids in dock order: the order arrow keys and swipes step through.
+    var order = tiles.map(function (tile) { return tile.getAttribute("href").slice(1); });
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     var openId = null;
 
-    // Show the panel with this id and hide the rest. A null or unknown id closes everything.
-    function show(id) {
-        openId = null;
-        panels.forEach(function (panel) {
-            var active = panel.id === id;
-            panel.classList.toggle("is-active", active);
-            if (active) {
-                openId = id;
-            }
-        });
+    function markTile(id) {
         tiles.forEach(function (tile) {
-            if (openId && tile.getAttribute("href") === "#" + openId) {
+            if (id && tile.getAttribute("href") === "#" + id) {
                 tile.setAttribute("aria-current", "true");
             } else {
                 tile.removeAttribute("aria-current");
@@ -33,14 +29,65 @@
         });
     }
 
-    function open(id) {
-        show(id);
+    // Show the panel with this id and hide the rest. A null or unknown id closes everything.
+    // When switching between panels the new one slides in: from the side its tile is on,
+    // or from the given direction (+1 = from the right) when stepping with arrows or a swipe.
+    function show(id, direction) {
+        var from = order.indexOf(openId);
+        var to = order.indexOf(id);
+        var slide = "";
+        if (from !== -1 && to !== -1 && from !== to) {
+            slide = (direction || to - from) > 0 ? "from-right" : "from-left";
+        }
+
+        openId = null;
+        panels.forEach(function (panel) {
+            var active = panel.id === id;
+            panel.classList.remove("is-closing", "from-right", "from-left");
+            panel.classList.toggle("is-active", active);
+            if (active) {
+                openId = id;
+                if (slide) {
+                    panel.classList.add(slide);
+                }
+            }
+        });
+        markTile(openId);
+    }
+
+    function open(id, direction) {
+        show(id, direction);
         history.replaceState(null, "", "#" + id);
     }
 
+    // Closing plays the sink animation (css/site.css) before the panel is hidden.
     function close() {
-        show(null);
+        var panel = openId && document.getElementById(openId);
         history.replaceState(null, "", location.pathname + location.search);
+        if (!panel || reduceMotion.matches) {
+            show(null);
+            return;
+        }
+        openId = null;
+        markTile(null);
+        panel.classList.remove("from-right", "from-left");
+        panel.classList.add("is-closing");
+        var done = function () {
+            // Skip if the panel was reopened while it was animating out.
+            if (panel.classList.contains("is-closing")) {
+                panel.classList.remove("is-closing", "is-active");
+            }
+        };
+        panel.addEventListener("animationend", done, { once: true });
+        setTimeout(done, 400);
+    }
+
+    // Move to the next (+1) or previous (-1) panel in dock order, wrapping round.
+    function step(delta) {
+        var index = order.indexOf(openId);
+        if (index !== -1) {
+            open(order[(index + delta + order.length) % order.length], delta);
+        }
     }
 
     function showFromHash() {
@@ -69,11 +116,35 @@
                 '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15"/></svg>';
             button.addEventListener("click", close);
             panel.insertBefore(button, panel.firstChild);
+
+            // Swipe left/right on an open panel to step through the apps.
+            // Mostly-vertical drags are left alone so the panel can scroll.
+            var startX = 0;
+            var startY = 0;
+            panel.addEventListener("touchstart", function (event) {
+                startX = event.touches[0].clientX;
+                startY = event.touches[0].clientY;
+            }, { passive: true });
+            panel.addEventListener("touchend", function (event) {
+                var dx = event.changedTouches[0].clientX - startX;
+                var dy = event.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) > 50 && Math.abs(dx) > 1.5 * Math.abs(dy)) {
+                    step(dx < 0 ? 1 : -1);
+                }
+            }, { passive: true });
         });
 
+        // Escape closes; left/right arrows step through the apps while a panel is open.
         document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape" && openId) {
+            if (!openId || event.altKey || event.ctrlKey || event.metaKey) {
+                return;
+            }
+            if (event.key === "Escape") {
                 close();
+            } else if (event.key === "ArrowRight") {
+                step(1);
+            } else if (event.key === "ArrowLeft") {
+                step(-1);
             }
         });
 
@@ -90,6 +161,49 @@
         showFromHash();
     }
 
+    /* ---------- Light on glass ---------- */
+
+    // A soft highlight on every .glass surface that follows the mouse pointer.
+    // The CSS draws it from --light-x / --light-y (css/site.css, ".glass").
+    var glass = Array.prototype.slice.call(document.querySelectorAll(".glass"));
+    var pointer = null;
+
+    function paintLight() {
+        glass.forEach(function (surface) {
+            var rect = surface.getBoundingClientRect();
+            if (pointer && rect.width) {
+                surface.style.setProperty("--light-x", (pointer.x - rect.left) + "px");
+                surface.style.setProperty("--light-y", (pointer.y - rect.top) + "px");
+            } else {
+                surface.style.removeProperty("--light-x");
+                surface.style.removeProperty("--light-y");
+            }
+        });
+    }
+
+    if (glass.length && window.matchMedia("(hover: hover)").matches) {
+        var queued = false;
+        var schedule = function () {
+            if (!queued) {
+                queued = true;
+                requestAnimationFrame(function () {
+                    queued = false;
+                    paintLight();
+                });
+            }
+        };
+        document.addEventListener("pointermove", function (event) {
+            if (event.pointerType === "mouse") {
+                pointer = { x: event.clientX, y: event.clientY };
+                schedule();
+            }
+        });
+        document.documentElement.addEventListener("pointerleave", function () {
+            pointer = null;
+            schedule();
+        });
+    }
+
     /* ---------- Hero video ---------- */
 
     var video = document.querySelector(".hero video");
@@ -102,7 +216,7 @@
         };
 
         // Respect "reduce motion": start paused on the poster frame.
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (reduceMotion.matches) {
             video.removeAttribute("autoplay");
             video.pause();
         }

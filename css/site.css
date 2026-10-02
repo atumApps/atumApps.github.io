@@ -99,8 +99,18 @@ p {
 
 /* ---------- Glass ---------- */
 
+/* The radial gradient is the "light on glass": js/site.js moves --light-x/-y
+   to the mouse pointer. Off-surface by default, so it is invisible until then.
+   Set background-color (not the background shorthand) on glass variants, or
+   the light is lost. */
 .glass {
-    background: var(--glass-fill);
+    background-color: var(--glass-fill);
+    background-image: radial-gradient(
+        circle 260px at var(--light-x, -999px) var(--light-y, -999px),
+        rgba(255, 255, 255, 0.17),
+        transparent
+    );
+    background-repeat: no-repeat;
     border: 1px solid var(--glass-edge);
     border-radius: var(--radius-sheet);
     box-shadow: var(--glass-drop), var(--glass-glow);
@@ -151,7 +161,7 @@ p {
 /* Darker glass for anything sitting directly on the video, so it stays legible. */
 .brand,
 .video-toggle {
-    background: rgba(7, 13, 31, 0.6);
+    background-color: rgba(7, 13, 31, 0.6);
 }
 
 .brand img {
@@ -240,7 +250,7 @@ p {
     gap: 6px 28px;
     margin-top: 18px;
     padding: 14px 18px 12px;
-    background: rgba(12, 26, 66, 0.82); /* denser than other glass */
+    background-color: rgba(12, 26, 66, 0.82); /* denser than other glass */
 }
 
 .dock-group {
@@ -342,7 +352,8 @@ p {
     display: flex;
     flex-direction: column;
     min-height: 0;
-    background: rgba(12, 26, 66, 0.84); /* dense, so text stays readable over the video */
+    background-color: rgba(12, 26, 66, 0.84); /* dense, so text stays readable over the video */
+    transform-origin: 50% 100%;
 }
 
 .panel + .panel {
@@ -357,6 +368,50 @@ p {
 
 .js .panel.is-active {
     display: flex;
+    animation: panel-rise 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Opening: the panel rises out of the dock. Closing: it sinks back.
+   Switching apps: the new panel slides in from the side its tile is on.
+   js/site.js adds the from-left / from-right / is-closing classes. */
+.js .panel.from-right {
+    animation-name: panel-from-right;
+}
+
+.js .panel.from-left {
+    animation-name: panel-from-left;
+}
+
+.js .panel.is-closing {
+    animation: panel-sink 170ms ease-in forwards;
+}
+
+@keyframes panel-rise {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.95);
+    }
+}
+
+@keyframes panel-sink {
+    to {
+        opacity: 0;
+        transform: translateY(32px) scale(0.95);
+    }
+}
+
+@keyframes panel-from-right {
+    from {
+        opacity: 0;
+        transform: translateX(48px);
+    }
+}
+
+@keyframes panel-from-left {
+    from {
+        opacity: 0;
+        transform: translateX(-48px);
+    }
 }
 
 .panel-body {
@@ -693,5 +748,10 @@ p {
 
     .tile-icon {
         transition: none;
+    }
+
+    .js .panel.is-active,
+    .js .panel.is-closing {
+        animation: none;
     }
 }

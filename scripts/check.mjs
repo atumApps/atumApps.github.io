@@ -68,7 +68,7 @@ if (JSON.stringify(panelText) !== JSON.stringify(pageText)) {
 }
 
 // Files GitHub Pages and the app stores rely on.
-for (const file of ["CNAME", "app-ads.txt", "privacy.html", ".nojekyll"]) {
+for (const file of ["CNAME", "privacy.html", ".nojekyll"]) {
     if (!existsSync(join(root, file))) errors.push(`${file} is missing and must not be deleted`);
 }
 

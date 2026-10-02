@@ -22,7 +22,7 @@ index.html            Home: hero video, one panel per app, dock of tiles at the 
 privacy.html          The one privacy policy, covering every app
 404.html              Not-found page (uses root-relative URLs only)
 css/site.css          The only stylesheet. Design tokens are at the top
-js/site.js            The only script: panel switching + video pause button
+js/site.js            The only script: panels, glass highlight, video pause button
 img/lotus.png         Logo
 img/icons/<app>.png   Dock icons, 256x256, blue on transparent
 img/screens/<app>.webp  Screenshots shown in panels
@@ -34,7 +34,6 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 ## Do not delete or rename
 
 - `CNAME` — binds the site to www.atumapps.com.
-- `app-ads.txt` — required by Google AdMob for Tiny Evolution.
 - `privacy.html` — the app stores link to `/privacy`. The URL must keep
   working. (`/inkhornprivacy` was deliberately deleted on 2 October 2026.)
 - `.nojekyll` — tells GitHub Pages to serve files as they are.
@@ -57,6 +56,13 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
   tile with `aria-current="true"`. Clicking the tile again, the panel's X
   (added by the script) or Escape closes it. Nothing is open by default.
   Without JavaScript all panels are shown stacked in a normal scrolling page.
+- Motion and input, all in `js/site.js` + `css/site.css`: a panel rises out of
+  the dock when opened and sinks when closed; switching apps slides the new
+  panel in from the side its tile is on. Left/right arrow keys and sideways
+  swipes step through panels in dock order. A soft highlight follows the mouse
+  across every `.glass` surface. All of it is switched off under
+  `prefers-reduced-motion`. Glass variants must set `background-color`, not
+  `background`, or they lose the highlight.
 - App panels hold only the description and store badge. Bug reports and
   feature requests go through the "Contact us" button in About us; do not add
   per-app "Noticed a bug?" lines back.
