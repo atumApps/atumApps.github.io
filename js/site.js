@@ -77,12 +77,14 @@
             }
         });
 
-        // Phones lay the dock out in exactly two rows; tell the CSS how many tiles there are.
+        // Phones show the app tiles in exactly two rows, the shorter row on top.
+        // Tell the CSS how many columns that needs and where the second row starts.
+        var appItems = document.querySelectorAll(".dock-group--apps .dock-tiles > li");
         var dock = document.querySelector(".dock");
-        var allTiles = dock.querySelectorAll(".tile").length;
-        var studioTiles = dock.querySelectorAll(".dock-group--studio .tile").length;
-        dock.style.setProperty("--dock-columns", Math.ceil(allTiles / 2));
-        dock.style.setProperty("--dock-studio", studioTiles);
+        dock.style.setProperty("--apps-columns", Math.ceil(appItems.length / 2));
+        if (appItems.length > 1) {
+            appItems[Math.floor(appItems.length / 2)].classList.add("tile-row-start");
+        }
 
         window.addEventListener("hashchange", showFromHash);
         showFromHash();

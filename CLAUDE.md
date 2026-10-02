@@ -19,8 +19,7 @@ within a couple of minutes, so preview locally first.
 
 ```
 index.html            Home: hero video, one panel per app, dock of tiles at the bottom
-privacy.html          Privacy policy for all apps
-inkhornprivacy.html   Privacy policy for Inkhorn
+privacy.html          The one privacy policy, covering every app
 404.html              Not-found page (uses root-relative URLs only)
 css/site.css          The only stylesheet. Design tokens are at the top
 js/site.js            The only script: panel switching + video pause button
@@ -36,8 +35,8 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 
 - `CNAME` — binds the site to www.atumapps.com.
 - `app-ads.txt` — required by Google AdMob for Tiny Evolution.
-- `privacy.html`, `inkhornprivacy.html` — the app stores link to
-  `/privacy` and `/inkhornprivacy`. The URLs must keep working.
+- `privacy.html` — the app stores link to `/privacy`. The URL must keep
+  working. (`/inkhornprivacy` was deliberately deleted on 2 October 2026.)
 - `.nojekyll` — tells GitHub Pages to serve files as they are.
 - Favicons and `site.webmanifest` in the repo root.
 
@@ -51,8 +50,9 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
   that body scrolls inside the panel (scroll bar hidden) when it is too tall.
 - The **dock** (`<nav class="dock">`) is last in the HTML and holds one
   `<a class="tile" href="#id">` per panel, grouped under "Apps" and "Studio".
-  On phones it must always be exactly two rows of tiles with no scrolling;
-  `js/site.js` sets `--dock-columns` from the tile count so tiles shrink to fit.
+  On phones the two groups sit side by side — Apps in two rows (shorter row
+  on top), Studio one tile per row — and it must never scroll; `js/site.js`
+  sets `--apps-columns` from the tile count so tiles shrink to fit.
 - `js/site.js` opens the panel matching the tile or URL hash and marks its
   tile with `aria-current="true"`. Clicking the tile again, the panel's X
   (added by the script) or Escape closes it. Nothing is open by default.
@@ -77,7 +77,9 @@ scripts/check.mjs     Link/asset/structure check, also run in CI
 3. In `index.html`, copy an existing `<li>` tile in the dock and an existing
    `<section class="panel">`; change the slug, text and the
    App Store link (keep `&mt=8` on the end of App Store links).
-4. If the app collects any data, update `privacy.html`.
+4. `privacy.html` is one generic policy for every app and names no app. If
+   the new app handles data differently, tell the owner; do not reword the
+   policy yourself.
 5. Run `node scripts/check.mjs` and preview at desktop and phone widths.
 
 ## Unfinished: Inkhorn
@@ -100,7 +102,7 @@ screenshot and the App Store / Google Play links (search `index.html` for `TODO`
 - Every `<img>` needs `alt`, `width` and `height`. Use `alt=""` for decoration.
 - Respect `prefers-reduced-motion` for anything that moves.
 - The header and footer are repeated by hand in each HTML page. If you change
-  one, change all four pages.
+  one, change all three pages.
 - Do not rewrite the app descriptions or privacy text unless asked; that copy
   is the owner's.
 
