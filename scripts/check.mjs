@@ -25,6 +25,8 @@ for (const page of pages) {
         let target = page;
         if (path && path !== "/") {
             target = path.startsWith("/") ? path.slice(1) : path;
+            // GitHub Pages serves /privacy from privacy.html.
+            if (!existsSync(join(root, target)) && existsSync(join(root, target + ".html"))) target += ".html";
             if (!existsSync(join(root, target))) {
                 errors.push(`${page}: ${attr}="${value}" points at a missing file`);
                 continue;
